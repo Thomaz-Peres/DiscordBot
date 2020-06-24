@@ -1,13 +1,15 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.Interactivity;
-using DSharpPlus.VoiceNext;
-using DSharpPlus.Entities;
-using DSharpPlus.Exceptions;
-using DSharpPlus.EventArgs;
-using DSharpPlus.Net;
 using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Exceptions;
+using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
+using DSharpPlus.VoiceNext;
+using DSharpPlus.VoiceNext.Codec;
+using Newtonsoft.Json;
 
 
 namespace FirstBotDiscord
@@ -16,7 +18,7 @@ namespace FirstBotDiscord
     {
         static DiscordClient client;    // using to interact with discord API.
         static CommandsNextModule commands;
-        static InteractivityModule interactivity;
+        //static InteractivityModule interactivity;
         static VoiceNextClient voice;
 
         static void Main(string[] args)
@@ -29,7 +31,7 @@ namespace FirstBotDiscord
             
             client = new DiscordClient(new DiscordConfiguration
             {       //criando a configuraçao do bot 
-                Token = "NzI0OTc1Njg3MjY5NjEzNjYw.XvINuw.kgZ77Qng2eknF7hGSL1qDPNnXGc",
+                Token = "NzI0OTc1Njg3MjY5NjEzNjYw.XvPLLA.GfMzwjuuYkyhe92cV2JfzRHERu0",
                 TokenType = TokenType.Bot,
                 UseInternalLogHandler = true,
                 LogLevel = LogLevel.Debug
@@ -44,13 +46,14 @@ namespace FirstBotDiscord
             //bot class
             commands = client.UseCommandsNext(new CommandsNextConfiguration 
             {   //comandos para "ativar" o bot.
-                EnableDms = false,
+                EnableDms = true,
+                EnableMentionPrefix = true,
                 StringPrefix = "-"
             });
 
             commands.RegisterCommands<MyCommands>();
             voice = client.UseVoiceNext();
-            interactivity = client.UseInteractivity(new InteractivityConfiguration());
+            //interactivity = client.UseInteractivity(new InteractivityConfiguration());
             
             
             await client.ConnectAsync();
