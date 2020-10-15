@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TN6ks7scU9R8ZGGkhdmbbCZf+K1dOjRRJC5+GU3Actx2p/PhqJzLRBE0hOU6b5LThUT/q6NSDA+JeY2e4pwBPw==",
+  "dgSpecHash": "oAepktaczVhVJvLP1qQfez/tM2/go0c0mO+I7nqEeN8aRNRPWJBxeksqQM2zW4AxiuP5MCNmZJdn558Lw8xH8A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AlphaPaiN\\Documents\\AB study\\FirstBotDiscord\\FirstBotDiscord.csproj",
+  "projectFilePath": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AlphaPaiN\\.nuget\\packages\\dsharpplus\\3.2.3\\dsharpplus.3.2.3.nupkg.sha512",
     "C:\\Users\\AlphaPaiN\\.nuget\\packages\\dsharpplus.commandsnext\\3.2.3\\dsharpplus.commandsnext.3.2.3.nupkg.sha512",

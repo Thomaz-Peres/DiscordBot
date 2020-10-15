@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AlphaPaiN\\Documents\\AB study\\FirstBotDiscord\\FirstBotDiscord.csproj": {}
+    "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AlphaPaiN\\Documents\\AB study\\FirstBotDiscord\\FirstBotDiscord.csproj": {
+    "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AlphaPaiN\\Documents\\AB study\\FirstBotDiscord\\FirstBotDiscord.csproj",
+        "projectUniqueName": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
         "projectName": "FirstBotDiscord",
-        "projectPath": "C:\\Users\\AlphaPaiN\\Documents\\AB study\\FirstBotDiscord\\FirstBotDiscord.csproj",
+        "projectPath": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
         "packagesPath": "C:\\Users\\AlphaPaiN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AlphaPaiN\\Documents\\AB study\\FirstBotDiscord\\obj\\",
+        "outputPath": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\AlphaPaiN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -47,7 +49,7 @@
             },
             "DSharpPlus.CommandsNext": {
               "target": "Package",
-              "version": "[3.2.3, )"
+              "version": "[*, )"
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
@@ -73,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
