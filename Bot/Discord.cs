@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using FirstBotDiscord.Commands;
 
 namespace FirstBotDiscord.Bot
 {
     class Discord
     {
-        static string token = "NzI0OTc1Njg3MjY5NjEzNjYw.XvIAOQ.UhNPI6dWzQN4OS95lLCJyJ_RFWU";
+        static string token = "";
         static DiscordClient discord;   // using to interact with discord API.
         static CommandsNextModule commands;
         
@@ -31,7 +32,7 @@ namespace FirstBotDiscord.Bot
                 //command module initialisation
                 if (e.Message.Content.ToLower().StartsWith("salve"))
                 {
-                    await e.Message.RespondAsync("Dalee!");
+                    await e.Message.RespondAsync($"Dalee! {e.Author.Mention}");
                 }
             };
 
@@ -40,7 +41,7 @@ namespace FirstBotDiscord.Bot
                 StringPrefix = ";;"
             });
 
-            commands.RegisterCommands<FirstBotDiscord.Commands.MyCommands>();
+            commands.RegisterCommands<MyCommands>();
 
             await discord.ConnectAsync();
             //espera infinita, para o bot ficar online continuamente.
