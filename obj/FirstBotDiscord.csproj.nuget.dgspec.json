@@ -1,36 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj": {}
+    "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj": {
+    "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
+        "projectUniqueName": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj",
         "projectName": "FirstBotDiscord",
-        "projectPath": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
-        "packagesPath": "C:\\Users\\AlphaPaiN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AlphaPaiN\\dev\\DiscordBotC-\\obj\\",
+        "projectPath": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\AlphaPaiN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.autobem.coop.br/nuget/Autobem/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -41,23 +42,44 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[3.2.3, )"
+              "version": "[4.0.0-rc1, )"
             },
             "DSharpPlus.CommandsNext": {
               "target": "Package",
-              "version": "[3.2.3, )"
+              "version": "[4.0.0-rc1, )"
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[3.2.3, )"
+              "version": "[4.0.0-rc1, )"
+            },
+            "DSharpPlus.Lavalink": {
+              "target": "Package",
+              "version": "[4.0.0-rc1, )"
+            },
+            "DSharpPlus.Rest": {
+              "target": "Package",
+              "version": "[4.0.0-rc1, )"
             },
             "DSharpPlus.VoiceNext": {
               "target": "Package",
-              "version": "[3.2.3, )"
+              "version": "[4.0.0-rc1, )"
+            },
+            "Lavalink4NET": {
+              "target": "Package",
+              "version": "[1.6.2, )"
+            },
+            "Lavalink4NET.DSharpPlus": {
+              "target": "Package",
+              "version": "[1.6.2, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -75,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
