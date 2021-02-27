@@ -14,7 +14,8 @@
     <PackageReference Include="DSharpPlus.VoiceNext" Version="4.0.0-rc1" />
     <PackageReference Include="Lavalink4NET" Version="1.6.2" />
     <PackageReference Include="Lavalink4NET.DSharpPlus" Version="1.6.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
 
 </Project>

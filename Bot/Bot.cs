@@ -1,20 +1,24 @@
 ﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using DSharpPlus.Entities;
 using DSharpPlus.Lavalink;
 using DSharpPlus.Net;
 using FirstBotDiscord.Commands;
+using FirstBotDiscord.Models;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Bot
 {
     class Bot
     {
-        static readonly string token = "NzI0OTc1Njg3MjY5NjEzNjYw.XvIAOQ.TKcPu50pvMQ12edg_6crsiHLuRQ";
+        static readonly string token = "";  // Token your discord bot
+        static readonly string CredentialCode = ""; // Token from B3 api 
         static DiscordClient discord;   // using to interact with discord API.
         static CommandsNextExtension commands;
-        
+
         static void Main(string[] args)
         {
             MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -34,11 +38,22 @@ namespace FirstBotDiscord.Bot
             #region Comandos
             commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
-                StringPrefixes = new[] { ";" }
+                StringPrefixes = new[] { "/" }
             });
 
-            //commands.RegisterCommands<MyCommands>();
+            commands.RegisterCommands<MyCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
+            #endregion
+
+            #region B3 api webmat
+            HubConnection connection;
+
+            connection = new HubConnectionBuilder().WithUrl(new System.Uri("http://b3api.webmat.com.br/HubConnection?Token=" + CredentialCode)).WithAutomaticReconnect().Build();
+            connection.On<string>("LogOut", (msg) => LogOut(msg));
+
+            connection.On<IEnumerable<Ticks>>("UpdateList", (ticklist) => UpdateList(ticklist));
+
+            await connection.StartAsync();
             #endregion
 
 
@@ -64,5 +79,20 @@ namespace FirstBotDiscord.Bot
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);
         }
+
+        public static void LogOut(string msg)
+        {
+            System.Console.WriteLine(msg);
+        }
+
+        public static void UpdateList(IEnumerable<Ticks> tickList)
+        {
+            System.Console.Clear();
+            foreach (Ticks data in tickList.OrderBy(q => q.Customer.Symbol))
+            {
+                System.Console.WriteLine(data.Time + " - " + data.Customer.Symbol);
+            }
+        }
     }
 }
+
