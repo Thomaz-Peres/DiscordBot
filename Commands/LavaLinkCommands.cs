@@ -96,5 +96,33 @@ namespace FirstBotDiscord.Commands
 
             await context.RespondAsync($"Musica tocando no momento {track.Title} !");
         }
+
+        [Command]
+        public async Task Pause(CommandContext context)
+        {
+            if(context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
+            {
+                await context.RespondAsync("Você nao esta conectado a um canal de voz");
+                return;
+            }
+
+            var lava = context.Client.GetLavalink();
+            var node = lava.ConnectedNodes.Values.First();
+            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
+
+            if(conn == null)
+            {
+                await context.RespondAsync("LavaLink não esta conectado");
+                return;
+            }
+
+            if(conn.CurrentState.CurrentTrack == null)
+            {
+                await context.RespondAsync("Não tem nenhuma musica tocando");
+                return;
+            }
+
+            await conn.PauseAsync();
+        }
     }
 }
