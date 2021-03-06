@@ -34,6 +34,8 @@ namespace FirstBotDiscord.Commands
             await node.ConnectAsync(channel);
             await context.RespondAsync($"Joined {channel.Name}!");
         }
+
+        [Command]
         public async Task Leave(CommandContext context, DiscordChannel channel)
         {
             var lava = context.Client.GetLavalink();

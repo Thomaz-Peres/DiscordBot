@@ -12,5 +12,11 @@ namespace FirstBotDiscord.Commands
         {
             await ctx.RespondAsync($"Eae meu querido {ctx.User.Mention}");
         }
+
+        [Command("ticker")]
+        public async Task Ticker(CommandContext context, string ticker)
+        {
+            await context.RespondAsync($"O ultimo preço foi {B3Api.B3Api.UpdateList(ticker)}");
+        }
     }
 }

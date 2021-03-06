@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "S3HlHKCIWINaaaA+59NI5LeSuYFqY4+8JVSUOY7lvaILsaSza6zKLZa4U/QJq4nM7tmgbGGxd+AkmBCaVxJVrw==",
+  "dgSpecHash": "mLBQ3zitsrA0EkgGCbYRZZcWHrtOWDnqR0UUo5GFSvTle8pPgs6FmcPPvTJy3MJYEtXXrdZeoaIxh3ATAToIMA==",
   "success": true,
   "projectFilePath": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,8 @@
     "C:\\Users\\thoma\\.nuget\\packages\\microsoft.aspnetcore.signalr.client.core\\5.0.1\\microsoft.aspnetcore.signalr.client.core.5.0.1.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\microsoft.aspnetcore.signalr.common\\5.0.1\\microsoft.aspnetcore.signalr.common.5.0.1.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\microsoft.aspnetcore.signalr.protocols.json\\5.0.1\\microsoft.aspnetcore.signalr.protocols.json.5.0.1.nupkg.sha512",
+    "C:\\Users\\thoma\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
+    "C:\\Users\\thoma\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",

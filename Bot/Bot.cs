@@ -12,50 +12,36 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Bot
 {
-    class Bot
-    {
-        static readonly string token = "";  // Token your discord bot
-        static readonly string CredentialCode = ""; // Token from B3 api 
-        static DiscordClient discord;   // using to interact with discord API.
-        static CommandsNextExtension commands;
-
-        static void Main(string[] args)
-        {
-            MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
-        }
+    public class Bot
+    {        
+        static void Main(string[] args) => MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
 
         static async Task MainAsync(string[] args)
         {
             #region Conexao discord
+            var discord = Configurations.Parameters.discord;
+
             discord = new DiscordClient(new DiscordConfiguration
             {
-                Token = token,
+                Token = Configurations.Parameters.token,
                 TokenType = TokenType.Bot,
                 MinimumLogLevel = LogLevel.Debug
             });
             #endregion
 
             #region Comandos
+            var commands = Configurations.Parameters.commands;
+
             commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
-                StringPrefixes = new[] { "/" }
+                StringPrefixes = new[] { ";" }
             });
 
             commands.RegisterCommands<MyCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
             #endregion
 
-            #region B3 api webmat
-            HubConnection connection;
-
-            connection = new HubConnectionBuilder().WithUrl(new System.Uri("http://b3api.webmat.com.br/HubConnection?Token=" + CredentialCode)).WithAutomaticReconnect().Build();
-            connection.On<string>("LogOut", (msg) => LogOut(msg));
-
-            connection.On<IEnumerable<Ticks>>("UpdateList", (ticklist) => UpdateList(ticklist));
-
-            await connection.StartAsync();
-            #endregion
-
+            B3Api.B3Api.B3(args);
 
             var endPoint = new ConnectionEndpoint
             {
@@ -78,20 +64,6 @@ namespace FirstBotDiscord.Bot
 
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);
-        }
-
-        public static void LogOut(string msg)
-        {
-            System.Console.WriteLine(msg);
-        }
-
-        public static void UpdateList(IEnumerable<Ticks> tickList)
-        {
-            System.Console.Clear();
-            foreach (Ticks data in tickList.OrderBy(q => q.Customer.Symbol))
-            {
-                System.Console.WriteLine(data.Time + " - " + data.Customer.Symbol);
-            }
         }
     }
 }
