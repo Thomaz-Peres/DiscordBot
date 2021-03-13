@@ -49,12 +49,14 @@ namespace FirstBotDiscord.Bot
                 Port = 2333
             };
 
+
             var lavaLinkConfig = new LavalinkConfiguration
             {
                 Password = "youshallnotpass",
                 RestEndpoint = endPoint,
                 SocketEndpoint = endPoint
             };
+
 
             var lavalink = discord.UseLavalink();
 
