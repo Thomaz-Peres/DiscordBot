@@ -60,7 +60,9 @@ namespace FirstBotDiscord.Bot
 
             var lavalink = discord.UseLavalink();
 
+
             await discord.ConnectAsync();
+
 
             await lavalink.ConnectAsync(lavaLinkConfig);
 
