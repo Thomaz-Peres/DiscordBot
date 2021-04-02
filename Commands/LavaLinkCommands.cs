@@ -13,47 +13,45 @@ namespace FirstBotDiscord.Commands
 {
     public class LavaLinkCommands : BaseCommandModule
     {
-        [Command]
-        public async Task Join(CommandContext context, DiscordChannel channel) 
-        {
-            var lava = context.Client.GetLavalink();
-            if (!lava.ConnectedNodes.Any())
-            {
-                await context.RespondAsync("The Lavalink connection is not established");
-                return;
-            }
+        //[Command]
+        //public async Task Join(CommandContext context, DiscordChannel channel) 
+        //{
+        //    var lava = context.Client.GetLavalink();
+        //    if (!lava.ConnectedNodes.Any())
+        //    {
+        //        await context.RespondAsync("The Lavalink connection is not established");
+        //        return;
+        //    }
 
-            var node = lava.ConnectedNodes.Values.First();
+        //    var node = lava.ConnectedNodes.Values.First();
 
-            if (channel.Type != ChannelType.Voice)
-            {
-                await context.RespondAsync("Not a valid voice channel.");
-                return;
-            }
+        //    if (channel.Type != ChannelType.Voice)
+        //    {
+        //        await context.RespondAsync("Not a valid voice channel.");
+        //        return;
+        //    }
 
-            await node.ConnectAsync(channel);
-            await context.RespondAsync($"Joined {channel.Name}!");
-        }
+        //    await node.ConnectAsync(channel);
+        //    await context.RespondAsync($"Joined {channel.Name}!");
+        //}
 
         [Command]
         public async Task Leave(CommandContext context, DiscordChannel channel)
         {
             var lava = context.Client.GetLavalink();
+            var node = lava.ConnectedNodes.Values.First();
+            var conn = node.GetGuildConnection(channel.Guild);
             if (!lava.ConnectedNodes.Any())
             {
-                await context.RespondAsync("Conexão com lavalink não é estavel ou nao existe");
+                await context.RespondAsync("Conexão com lavalink não é estável ou nao existe");
                 return;
             }
-
-            var node = lava.ConnectedNodes.Values.First();
 
             if (channel.Type != ChannelType.Voice)
             {
                 await context.RespondAsync("Não é um canal valido");
                 return;
             }
-
-            var conn = node.GetGuildConnection(channel.Guild);
 
             if (conn == null)
             {
@@ -68,21 +66,26 @@ namespace FirstBotDiscord.Commands
         [Command]
         public async Task Play(CommandContext context, [RemainingText]string search)
         {
-            if(context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
-            {
-                await context.RespondAsync("Você não esta conectado em um canal de voz");
-                return;
-            }
-
             var lava = context.Client.GetLavalink();
             var node = lava.ConnectedNodes.Values.First();
-            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
+            var conn = node.GetGuildConnection(context.Member.Guild);
 
-            if(conn == null)
+            if (context.Member.VoiceState.Channel != null)
+            {
+                await node.ConnectAsync(context.Member.VoiceState.Channel);
+            }
+
+            if (context.Member.VoiceState.Channel != context.Channel)
+            {
+                await node.ConnectAsync(context.Member.VoiceState.Channel);
+            }
+
+            if (conn == null)
             {
                 await context.RespondAsync("LavaLink não esta conectado");
                 return;
             }
+            
 
             var loadResult = await node.Rest.GetTracksAsync(search);
 
@@ -92,25 +95,37 @@ namespace FirstBotDiscord.Commands
                 return;
             }
 
-            var track = loadResult.Tracks.First();
+            LavalinkTrack track = loadResult.Tracks.First();
+            List<LavalinkTrack> trackList = new List<LavalinkTrack>();
+            
+            if (loadResult.Tracks.ToList().Count != 0)
+            {
+                trackList = loadResult.Tracks.ToList();
+                trackList.Add(track);
+            }
+            track = trackList.AsQueryable().FirstOrDefault();
+
+
 
             await conn.PlayAsync(track);
 
-            await context.RespondAsync($"Musica tocando no momento {track.Title} !");
+            if(!conn.IsConnected)
+                await context.RespondAsync($":thumbsup: Conectado no canal {context.Member.VoiceState.Channel.Name}\n Música tocando: {track.Title} :headphones:");
+            else
+                await context.RespondAsync($"Música tocando: {track.Title} :headphones:");
         }
-
         [Command]
         public async Task Pause(CommandContext context)
         {
-            if(context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
+            var lava = context.Client.GetLavalink();
+            var node = lava.ConnectedNodes.Values.First();
+            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
+
+            if (context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
             {
                 await context.RespondAsync("Você nao esta conectado a um canal de voz");
                 return;
             }
-
-            var lava = context.Client.GetLavalink();
-            var node = lava.ConnectedNodes.Values.First();
-            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
 
             if(conn == null)
             {
@@ -130,15 +145,15 @@ namespace FirstBotDiscord.Commands
         [Command]
         public async Task Volts(CommandContext context)
         {
-            if(context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
+            var lava = context.Client.GetLavalink();
+            var node = lava.ConnectedNodes.Values.First();
+            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
+
+            if (context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
             {
                 await context.RespondAsync("Você nao esta conectado a um canal de voz");
                 return;
             }
-
-            var lava = context.Client.GetLavalink();
-            var node = lava.ConnectedNodes.Values.First();
-            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
 
             if(conn == null)
             {
@@ -153,6 +168,27 @@ namespace FirstBotDiscord.Commands
             }
 
             await conn.ResumeAsync();
+        }
+
+        [Command]
+        public async Task Stop(CommandContext context)
+        {
+            var lava = context.Client.GetLavalink();
+            var node = lava.ConnectedNodes.Values.First();
+            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
+
+            if (context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
+            {
+                await context.RespondAsync("Você nao esta conectado a um canal de voz");
+                return;
+            }
+
+            if(conn == null)
+            {
+                await context.RespondAsync("LavaLink não esta conectado");
+            }
+
+            await conn.StopAsync();
         }
     }
 }
