@@ -10,7 +10,7 @@ namespace FirstBotDiscord.Entities.Rpg
     {
         public InventoryEntity() { }
 
-        public int MinSlots { get; set; }
-        public int maxSlots { get; set; }
+        public int MinSlots { get; set; } = 10;
+        public int maxSlots { get; set; } = 32;
     }
 }

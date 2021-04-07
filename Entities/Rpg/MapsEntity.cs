@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Entities.Rpg
 {
-    public class LocalizationEntity
+    public class MapsEntity
     {
         public int ChannelId { get; set; }
         public string ChannelName { get; set; }
+        public int QuantidadeMonstros { get; set; } = 0;
     }
 }

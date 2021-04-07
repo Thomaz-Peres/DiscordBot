@@ -18,6 +18,12 @@ namespace FirstBotDiscord.Enums
         [Description("Livro de Fabricação")]
         CraftingBook,
         [Description("Armadura")]
-        Armour
+        Armour,
+        [Description("Materias")]
+        Subjects,
+        [Description("Artefatos")]
+        Artifacts,
+        [Description("Acessórios")]
+        Accessories
     }
 }

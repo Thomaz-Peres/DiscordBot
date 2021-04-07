@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using FirstBotDiscord.Entities;
 using FirstBotDiscord.Entities.B3;
 using Microsoft.AspNetCore.SignalR.Client;
 

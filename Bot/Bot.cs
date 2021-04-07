@@ -1,72 +1,33 @@
-﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.Lavalink;
-using DSharpPlus.Net;
-using FirstBotDiscord.Commands;
-using FirstBotDiscord.Entities;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿//using DSharpPlus;
+//using DSharpPlus.CommandsNext;
+//using DSharpPlus.Lavalink;
+//using FirstBotDiscord.Commands;
+//using FirstBotDiscord.Configurations;
+//using Microsoft.Extensions.Logging;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace FirstBotDiscord.Bot
-{
-    public class Bot
-    {        
-        static void Main(string[] args) => RodandoBot(args).GetAwaiter().GetResult();
+//namespace FirstBotDiscord.Bot
+//{
+//    public class Bot
+//    {
+//        public DiscordClient Client { get; private set; }
+//        public CommandsNextExtension Commands { get; private set; }
 
-        static async Task RodandoBot(string[] args)
-        {
-            #region Conexao discord
-            var discord = Configurations.Parameters.discord;
+//        public Bot(DiscordConfiguration discordConfiguration) => Client = new DiscordClient(discordConfiguration);
 
-            discord = new DiscordClient(new DiscordConfiguration
-            {
-                Token = Configurations.Parameters.token,
-                TokenType = TokenType.Bot,
-                MinimumLogLevel = LogLevel.Debug
-            });
-            #endregion
+//        public Task ConectarAsync() => Client.ConnectAsync();
 
-            #region Comandos
-            var commands = Configurations.Parameters.commands;
+//        public void GeneralCommands(CommandsNextConfiguration config)
+//        {
+//            this.Commands = Client.UseCommandsNext(config);
 
-            commands = discord.UseCommandsNext(new CommandsNextConfiguration()
-            {
-                StringPrefixes = new[] { ";" }
-            });
-
-            commands.RegisterCommands<StartCommands>();
-            commands.RegisterCommands<LavaLinkCommands>();
-            #endregion
-
-            B3Api.B3Api.B3(args);
-
-            var endPoint = new ConnectionEndpoint
-            {
-                Hostname = "127.0.0.1",
-                Port = 2333
-            };
-
-
-            var lavaLinkConfig = new LavalinkConfiguration
-            {
-                Password = "youshallnotpass",
-                RestEndpoint = endPoint,
-                SocketEndpoint = endPoint
-            };
-
-
-            
-            
-            var lavalink = discord.UseLavalink();
-            await discord.ConnectAsync();
-            await lavalink.ConnectAsync(lavaLinkConfig);
-
-            //espera infinita, para o bot ficar online continuamente.
-            await Task.Delay(-1);
-        }
-    }
-}
-
+//            this.Commands.RegisterCommands<StartCommands>();
+//            this.Commands.RegisterCommands<LavaLinkCommands>();
+//            this.Commands.RegisterCommands<B3Commands>();
+//        }
+//    }
+//}

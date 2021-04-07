@@ -1,13 +1,14 @@
 ﻿using FirstBotDiscord.Entities.Rpg.Class;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FirstBotDiscord.Entities.Rpg.Player
 {
     public class CharacterEntity
     {
-        public int CharacterId { get; set; }
+        public ulong CharacterId { get; set; }
         public string NameCharacter { get; set; }
-        public DateTime DateCreateCharacter { get; set; }
+        public DateTime DateCreateCharacter { get; set; } = DateTime.Now;
 
 
         public InventoryEntity Inventory { get; set; } = new InventoryEntity();
@@ -18,6 +19,7 @@ namespace FirstBotDiscord.Entities.Rpg.Player
 
 
         public StatePointsEntity LifePoints { get; set; } = new StatePointsEntity();
+        public StatePointsEntity ManaPoints { get; set; } = new StatePointsEntity();
         public StatePointsEntity KarmaPoints { get; set; } = new StatePointsEntity();
     }
 }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Commands
 {
-    public class B3Commands
+    public class B3Commands : BaseCommandModule
     {
         [Command("ticker")]
         public async Task Ticker(CommandContext context, string ticker)

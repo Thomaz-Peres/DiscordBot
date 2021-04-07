@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstBotDiscord.Entities.Rpg
+namespace FirstBotDiscord.Entities.B3
 {
     public class Ticks
     {

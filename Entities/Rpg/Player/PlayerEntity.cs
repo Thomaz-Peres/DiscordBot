@@ -9,6 +9,7 @@ namespace FirstBotDiscord.Entities.Rpg.Player
 {
     public class PlayerEntity
     {
+        public ulong PlayerId { get; set; }
         public CharacterEntity MyCharacter { get; set; }
 
         public int PlayersKill { get; set; }
