@@ -3,7 +3,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.Lavalink;
 using DSharpPlus.Net;
 using FirstBotDiscord.Commands;
-using FirstBotDiscord.Models;
+using FirstBotDiscord.Entities;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -14,9 +14,9 @@ namespace FirstBotDiscord.Bot
 {
     public class Bot
     {        
-        static void Main(string[] args) => MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
+        static void Main(string[] args) => RodandoBot(args).GetAwaiter().GetResult();
 
-        static async Task MainAsync(string[] args)
+        static async Task RodandoBot(string[] args)
         {
             #region Conexao discord
             var discord = Configurations.Parameters.discord;
@@ -37,7 +37,7 @@ namespace FirstBotDiscord.Bot
                 StringPrefixes = new[] { ";" }
             });
 
-            commands.RegisterCommands<MyCommands>();
+            commands.RegisterCommands<StartCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
             #endregion
 
@@ -58,12 +58,10 @@ namespace FirstBotDiscord.Bot
             };
 
 
+            
+            
             var lavalink = discord.UseLavalink();
-
-
             await discord.ConnectAsync();
-
-
             await lavalink.ConnectAsync(lavaLinkConfig);
 
             //espera infinita, para o bot ficar online continuamente.
