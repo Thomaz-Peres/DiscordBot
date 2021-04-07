@@ -103,9 +103,8 @@ namespace FirstBotDiscord.Commands
                 trackList = loadResult.Tracks.ToList();
                 trackList.Add(track);
             }
+            
             track = trackList.AsQueryable().FirstOrDefault();
-
-
 
             await conn.PlayAsync(track);
 
