@@ -2,7 +2,6 @@
 {
     public class AtributesEntity
     {
-        public AtributesEntity() { }
 
         // Aumenta o ataque fisico minimo e maximo do jogador
         public int Forca { get; set; } = 0;

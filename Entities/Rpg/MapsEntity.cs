@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FirstBotDiscord.Enums;
 
 namespace FirstBotDiscord.Entities.Rpg
 {
     public class MapsEntity
     {
-        public int ChannelId { get; set; }
-        public string ChannelName { get; set; }
-        public int QuantidadeMonstros { get; set; } = 0;
+        public ulong MapId { get; set; }
+        public string MapName { get; set; }
+        public MapsType MapsType { get; set; }
+        public int MonstersQuantity { get; set; } = 0;
     }
 }

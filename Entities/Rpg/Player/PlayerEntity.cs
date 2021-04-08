@@ -9,8 +9,11 @@ namespace FirstBotDiscord.Entities.Rpg.Player
 {
     public class PlayerEntity
     {
+        public int PlayerDbId { get; set; }
         public ulong PlayerId { get; set; }
-        public CharacterEntity MyCharacter { get; set; }
+        public string NamePlayer { get; set; }
+        public DateTime DateCreatePlayer { get; set; } = DateTime.Now;
+        public HashSet<CharacterEntity> MyCharacter { get; set; } = new HashSet<CharacterEntity>();
 
         public int PlayersKill { get; set; }
         public int MonsterKill { get; set; }
