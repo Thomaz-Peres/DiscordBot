@@ -10,8 +10,8 @@ namespace FirstBotDiscord.Entities.Rpg
     {
         public MoneyEntity() { }
 
-        public int Bronze { get; set; }
-        public int Silver { get; set; }
-        public int Gold { get; set; }
+        public double Bronze { get; set; }
+        public double Silver { get; set; }
+        public double Gold { get; set; }
     }
 }

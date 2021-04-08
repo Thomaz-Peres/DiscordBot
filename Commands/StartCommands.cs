@@ -8,28 +8,33 @@ using System;
 
 namespace FirstBotDiscord.Commands
 {
-    public class StartCommands : BaseCommandModule
+    public class StartCommands : BaseCommandModule, IServiceProvider
     {
         [Command("create")]
         [Description("Criar um personagem")]
         public async Task CreateCharacter(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            var player = new CharacterEntity();
+            var player = new PlayerEntity();
 
             var embed = new DiscordEmbedBuilder();
 
-            player.NameCharacter = ctx.User.Username;
-            player.CharacterId = ctx.User.Id;
+            player.NamePlayer = ctx.User.Username;
+            player.PlayerId = ctx.User.Id;
 
-            embed.AddField("ID do personagem:", $"{player.CharacterId}");
-            embed.AddField("Nome do seu personagem:", $"{player.NameCharacter}");
-            embed.AddField("Seu personagem foi criado em:", $"{player.DateCreateCharacter}");
+            embed.AddField("ID do personagem:", $"{player.PlayerId}");
+            embed.AddField("Nome do seu personagem:", $"{player.NamePlayer}");
+            embed.AddField("Seu personagem foi criado em:", $"{player.DateCreatePlayer}");
             embed.WithThumbnail(ctx.User.AvatarUrl);
             embed.WithColor(DiscordColor.Blue);
             embed.WithFooter("Se estiver de acordo, responda 'sim', caso não estiver, responda 'não'");
 
             await ctx.RespondAsync(embed.Build());
+        }
+
+        public object GetService(Type serviceType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -17,10 +17,12 @@ namespace FirstBotDiscord.Bot
     {
         public IConfiguration Configuration { get; }
 
-        static void Main(string[] args) => RodandoBot(args).GetAwaiter().GetResult();
+        public static void Main(string[] args) =>
+            new Bot().RodandoBot(args).GetAwaiter().GetResult();
 
-        static async Task RodandoBot(string[] args)
+        public async Task RodandoBot(string[] args)
         {
+            var services = ConfigureServices();
 
             var discord = new DiscordClient(new DiscordConfiguration
             {
@@ -32,17 +34,12 @@ namespace FirstBotDiscord.Bot
             
             var commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
-                StringPrefixes = new[] { ";" }
+                StringPrefixes = Parameters.Prefix
             });
 
             commands.RegisterCommands<StartCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<B3Commands>();
-
-            //var services = new ServiceCollection()
-            //    .AddDbContext<DataContext>(opt => opt.UseMySql());
-
-            //services.BuildServiceProvider();
 
             //B3Api.B3Api.B3(args);
 
@@ -67,7 +64,14 @@ namespace FirstBotDiscord.Bot
             await Task.Delay(-1);
         }
 
-        
+        private ServiceProvider ConfigureServices()
+        {
+            var service = new ServiceCollection()
+                .AddDbContext<DataContext>();
+
+            var serviceProvider = service.BuildServiceProvider();
+            return serviceProvider;
+        }
     }
 }
 
