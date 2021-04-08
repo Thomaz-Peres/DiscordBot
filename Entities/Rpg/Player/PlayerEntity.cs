@@ -9,7 +9,6 @@ namespace FirstBotDiscord.Entities.Rpg.Player
 {
     public class PlayerEntity
     {
-        public int PlayerDbId { get; set; }
         public ulong PlayerId { get; set; }
         public string NamePlayer { get; set; }
         public DateTime DateCreatePlayer { get; set; } = DateTime.Now;

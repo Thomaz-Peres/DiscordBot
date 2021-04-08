@@ -22,7 +22,6 @@ namespace FirstBotDiscord.Bot
 
         public async Task RodandoBot(string[] args)
         {
-            var services = ConfigureServices();
 
             var discord = new DiscordClient(new DiscordConfiguration
             {
@@ -62,15 +61,6 @@ namespace FirstBotDiscord.Bot
 
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);
-        }
-
-        private ServiceProvider ConfigureServices()
-        {
-            var service = new ServiceCollection()
-                .AddDbContext<DataContext>();
-
-            var serviceProvider = service.BuildServiceProvider();
-            return serviceProvider;
         }
     }
 }
