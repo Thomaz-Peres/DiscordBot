@@ -27,7 +27,11 @@ namespace FirstBotDiscord.Database
             MongoClient = new MongoClient("mongodb://localhost");
             MongoDatabase = MongoClient.GetDatabase("RpgDiscord");
 
-            
+            MapsBuilders.MapBuilderCharacter();
+            MapsBuilders.MapBuilderLevel();
+            MapsBuilders.MapBuilderMaps();
+            MapsBuilders.MapBuilderMoney();
+
         }
     }
 }

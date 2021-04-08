@@ -46,14 +46,5 @@ namespace FirstBotDiscord.Database
                 x.SetIgnoreExtraElements(true);
             });
         }
-
-        public static void MapBuilderMaps()
-        {
-            BsonClassMap.RegisterClassMap<MapsEntity>(x =>
-            {
-                x.AutoMap();
-                x.SetIgnoreExtraElements(true);
-            });
-        }
     }
 }

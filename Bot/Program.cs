@@ -4,6 +4,7 @@ using DSharpPlus.Lavalink;
 using DSharpPlus.Net;
 using FirstBotDiscord.Commands;
 using FirstBotDiscord.Configurations;
+using FirstBotDiscord.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace FirstBotDiscord.Bot
     public class Bot
     {
         public IConfiguration Configuration { get; }
+        public DataContext Database { get; private set; }
 
         public static void Main(string[] args) =>
             new Bot().RodandoBot(args).GetAwaiter().GetResult();
