@@ -1,5 +1,7 @@
 ﻿using FirstBotDiscord.Entities.Rpg;
+using FirstBotDiscord.Entities.Rpg.Items;
 using FirstBotDiscord.Entities.Rpg.Player;
+using FirstBotDiscord.Entities.Rpg.RpgMonsters;
 using MongoDB.Bson.Serialization;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,28 @@ namespace FirstBotDiscord.Database
 {
     public class MapsBuilders
     {
-        public static void MapBuilderCharacter()
+        public static void BuidAll()
+        {
+            MapBuilderPlayer();
+            MapBuilderCharacter();
+            MapBuilderMoney();
+            MapBuilderLevel();
+            MapBuilderMaps();
+            MapBuilderMonstersBase();
+            MapBuilderItemsBase();
+        }
+
+
+        private static void MapBuilderPlayer()
+        {
+            BsonClassMap.RegisterClassMap<PlayerEntity>(x =>
+            {
+                x.AutoMap();
+                x.SetIgnoreExtraElements(true);
+            });
+        }
+
+        private static void MapBuilderCharacter()
         {
             BsonClassMap.RegisterClassMap<CharacterEntity>(x =>
             {
@@ -20,7 +43,7 @@ namespace FirstBotDiscord.Database
             });
         }
 
-        public static void MapBuilderMoney()
+        private static void MapBuilderMoney()
         {
             BsonClassMap.RegisterClassMap<MoneyEntity>(x =>
             {
@@ -29,7 +52,7 @@ namespace FirstBotDiscord.Database
             });
         }
 
-        public static void MapBuilderLevel()
+        private static void MapBuilderLevel()
         {
             BsonClassMap.RegisterClassMap<LevelEntity>(x =>
             {
@@ -38,12 +61,32 @@ namespace FirstBotDiscord.Database
             });
         }
 
-        public static void MapBuilderMaps()
+        private static void MapBuilderMaps()
         {
             BsonClassMap.RegisterClassMap<MapsEntity>(x =>
             {
                 x.AutoMap();
                 x.SetIgnoreExtraElements(true);
+            });
+        }
+
+        private static void MapBuilderMonstersBase()
+        {
+            BsonClassMap.RegisterClassMap<BaseMonstersEntity>(x =>
+            {
+                x.AutoMap();
+                x.SetIgnoreExtraElements(true);
+                x.MapIdMember(x => x.MonsterId);
+            });
+        }
+
+        private static void MapBuilderItemsBase()
+        {
+            BsonClassMap.RegisterClassMap<BaseItemsEntity>(x =>
+            {
+                x.AutoMap();
+                x.SetIgnoreExtraElements(true);
+                x.MapIdMember(x => x.ItemId);
             });
         }
     }

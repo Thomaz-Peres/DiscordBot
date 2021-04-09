@@ -2,6 +2,7 @@
 using FirstBotDiscord.Entities.Rpg.Items;
 using FirstBotDiscord.Entities.Rpg.Player;
 using FirstBotDiscord.Entities.Rpg.RpgMonsters;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
@@ -16,22 +17,24 @@ namespace FirstBotDiscord.Database
     {
         public IMongoClient MongoClient { get; }
         public IMongoDatabase MongoDatabase { get; }
-        public IMongoCollection<PlayerEntity> CollectionJogadores { get; }
-        public IMongoCollection<BaseItemsEntity> CollectionServidores { get; }
+        public IMongoCollection<PlayerEntity> CollectionPlayers { get; }
+        public IMongoCollection<BaseItemsEntity> CollectionServers { get; }
         public IMongoCollection<BaseMonstersEntity> CollectionMonsters { get; }
         public IMongoCollection<MapsEntity> CollectionMaps { get; }
 
 
         public DataContext()
         {
-            MongoClient = new MongoClient("mongodb://localhost");
-            MongoDatabase = MongoClient.GetDatabase("RpgDiscord");
+            MongoClient = new MongoClient("mongodb://localhost:27017");
+            MongoDatabase = MongoClient.GetDatabase("rpgdiscord");
 
-            MapsBuilders.MapBuilderCharacter();
-            MapsBuilders.MapBuilderLevel();
-            MapsBuilders.MapBuilderMaps();
-            MapsBuilders.MapBuilderMoney();
+            MapsBuilders.BuidAll();
+            CollectionPlayers = MongoDatabase.GetCollection<PlayerEntity>("Players");
+            CollectionServers = MongoDatabase.GetCollection<BaseItemsEntity>("Items");
+            CollectionMonsters = MongoDatabase.GetCollection<BaseMonstersEntity>("Monster");
+            CollectionMaps = MongoDatabase.GetCollection<MapsEntity>("Maps");
 
+            MongoClient.StartSession();
         }
     }
 }

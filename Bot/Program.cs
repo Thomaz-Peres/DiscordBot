@@ -55,11 +55,16 @@ namespace FirstBotDiscord.Bot
                 RestEndpoint = endPoint,
                 SocketEndpoint = endPoint
             };
-            
+
+            this.Database = new DataContext();
+
+            var services = new ServiceCollection()
+                .AddSingleton(this.Database);
+
+
             var lavalink = discord.UseLavalink();
             await discord.ConnectAsync();
             await lavalink.ConnectAsync(lavaLinkConfig);
-
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);
         }
