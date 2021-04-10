@@ -1,4 +1,6 @@
-﻿using FirstBotDiscord.Entities.Rpg;
+﻿using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
+using FirstBotDiscord.Entities.Rpg;
 using FirstBotDiscord.Entities.Rpg.Items;
 using FirstBotDiscord.Entities.Rpg.Player;
 using FirstBotDiscord.Entities.Rpg.RpgMonsters;

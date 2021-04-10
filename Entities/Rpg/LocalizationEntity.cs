@@ -8,7 +8,17 @@ namespace FirstBotDiscord.Entities.Rpg
 {
     public class LocalizationEntity
     {
-        public int ChannelId { get; set; }
+        public ulong ChannelId { get; set; }
         public string ChannelName { get; set; }
+        
+        public LocalizationEntity(ulong channelID, string channelName)
+        {
+            this.ChannelId = channelID;
+            this.ChannelName = channelName;
+        }
+        public LocalizationEntity()
+        {
+
+        }
     }
 }

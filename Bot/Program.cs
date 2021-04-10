@@ -5,6 +5,7 @@ using DSharpPlus.Net;
 using FirstBotDiscord.Commands;
 using FirstBotDiscord.Configurations;
 using FirstBotDiscord.Database;
+using FirstBotDiscord.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace FirstBotDiscord.Bot
     {
         public IConfiguration Configuration { get; }
         public DataContext Database { get; private set; }
+        public StartsRepository StartsRepository { get; private set; }
 
         public static void Main(string[] args) =>
             new Bot().RodandoBot(args).GetAwaiter().GetResult();
@@ -31,9 +33,17 @@ namespace FirstBotDiscord.Bot
                 MinimumLogLevel = LogLevel.Debug
             });
 
-            
-            var commands = discord.UseCommandsNext(new CommandsNextConfiguration()
+            this.Database = new DataContext();
+            this.StartsRepository = new StartsRepository(this.Database);
+            var services = new ServiceCollection()
+                .AddSingleton(this.Database)
+                .AddSingleton(this.StartsRepository)
+                .BuildServiceProvider();
+
+
+            var commands = discord.UseCommandsNext(new CommandsNextConfiguration
             {
+                Services = services,
                 StringPrefixes = Parameters.Prefix
             });
 
@@ -56,15 +66,10 @@ namespace FirstBotDiscord.Bot
                 SocketEndpoint = endPoint
             };
 
-            this.Database = new DataContext();
-
-            var services = new ServiceCollection()
-                .AddSingleton(this.Database);
-
-
             var lavalink = discord.UseLavalink();
             await discord.ConnectAsync();
             await lavalink.ConnectAsync(lavaLinkConfig);
+
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);
         }

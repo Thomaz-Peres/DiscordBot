@@ -1,40 +1,104 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using System.Threading.Tasks;
-using FirstBotDiscord.Entities.Rpg.Player;
 using DSharpPlus.Entities;
-using FirstBotDiscord.Extensions;
+using FirstBotDiscord.Database;
+using MongoDB.Driver;
+using FirstBotDiscord.Entities.Rpg.Player;
+using FirstBotDiscord.Repository;
+using FirstBotDiscord.Entities.Rpg;
 using System;
+using MongoDB.Bson;
 
 namespace FirstBotDiscord.Commands
 {
-    public class StartCommands : BaseCommandModule, IServiceProvider
+    public class StartCommands : BaseCommandModule
     {
-        [Command("create")]
-        [Description("Criar um personagem")]
-        public async Task CreateCharacter(CommandContext ctx)
+        private readonly DataContext _context;
+        private readonly StartsRepository _repository;
+
+        public StartCommands(DataContext context, StartsRepository repository)
+        {
+            _context = context;
+            _repository = repository;
+        }
+            
+
+        [Command("createPlayer")]
+        [Aliases("cP")]
+        [Description("Cria um Player")]
+        public async Task CreatePlayer(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            var player = new PlayerEntity();
-
             var embed = new DiscordEmbedBuilder();
 
-            player.NamePlayer = ctx.User.Username;
-            player.PlayerId = ctx.User.Id;
+            var player = await _repository.FindUser(ctx.User);
 
-            embed.AddField("ID do personagem:", $"{player.PlayerId}");
-            embed.AddField("Nome do seu personagem:", $"{player.NamePlayer}");
-            embed.AddField("Seu personagem foi criado em:", $"{player.DateCreatePlayer}");
-            embed.WithThumbnail(ctx.User.AvatarUrl);
-            embed.WithColor(DiscordColor.Blue);
-            embed.WithFooter("Se estiver de acordo, responda 'sim', caso não estiver, responda 'não'");
+            
+            
+            if (player == null)
+            {
+                player = new PlayerEntity();
+                player.PlayerId = ctx.User.Id;
+                player.NamePlayer = ctx.User.Username;
+                player.MyCharacter.CurrentLocalization = new LocalizationEntity(ctx.Channel.Id, ctx.Channel.Name);
+                await _context.CollectionPlayers.InsertOneAsync(player);
 
-            await ctx.RespondAsync(embed.Build());
+                embed.AddField("Nome do seu cadastro:", $"{player.NamePlayer}");
+                embed.AddField("Seu cadastro foi criado em:", $"{player.DateCreatePlayer}");
+
+                embed.WithThumbnail(ctx.User.AvatarUrl);
+                embed.WithColor(DiscordColor.Blue);
+                embed.WithFooter($"Conta criada com sucesso. \nUse o comando 'x' para descobrir quantos pontos de habilidade você ganhara");
+
+
+                await ctx.RespondAsync(embed.Build());
+                return;
+            }
+
+            if (player.PlayerId == ctx.User.Id)
+            {
+                embed.WithDescription("Você ja possui uma conta, seu noia");
+                await ctx.RespondAsync(embed.Build());
+                return;
+            }
         }
 
-        public object GetService(Type serviceType)
+        [Command("playDice")]
+        [Aliases("pd")]
+        [Description("Cria um personagem dentro do player")]
+        public async Task PlayDice(CommandContext ctx)
         {
-            throw new NotImplementedException();
+            await ctx.TriggerTypingAsync();
+            var embed = new DiscordEmbedBuilder();
+            Random random = new Random();
+
+            int atributtesNum = random.Next(1, 6);
+
+            var player = await _repository.FindUser(ctx.User);
+            
+
+            if (player.PlayerId == ctx.User.Id && player.PlayDice == false)
+            {
+                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres", atributtesNum);
+                var update2 = Builders<PlayerEntity>.Update.Set("PlayDice", true);
+                
+                
+                embed.AddField($"{ctx.User.Username} ganhou {atributtesNum} de atributos iniciais:", $"{atributtesNum}");
+                await ctx.RespondAsync(embed.Build());
+                
+                
+                var filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+                var filter2 = Builders<PlayerEntity>.Filter.Eq(x => x.PlayDice, true);
+
+                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+                await _context.CollectionPlayers.UpdateOneAsync(filter, update2);
+                return;
+            }
+            else
+            {
+                await ctx.RespondAsync($"{ctx.User.Mention} Você ja ganhou seus atributos, seu arrombado");
+            }
         }
     }
 }
