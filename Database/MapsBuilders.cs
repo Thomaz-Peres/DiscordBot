@@ -3,6 +3,7 @@ using FirstBotDiscord.Entities.Rpg.Items;
 using FirstBotDiscord.Entities.Rpg.Player;
 using FirstBotDiscord.Entities.Rpg.RpgMonsters;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace FirstBotDiscord.Database
             {
                 x.AutoMap();
                 x.SetIgnoreExtraElements(true);
-                x.MapIdMember(x => x.MonsterId);
+                x.MapIdMember(x => x.MonsterId).SetIdGenerator(ObjectIdGenerator.Instance);
             });
         }
 
@@ -86,7 +87,7 @@ namespace FirstBotDiscord.Database
             {
                 x.AutoMap();
                 x.SetIgnoreExtraElements(true);
-                x.MapIdMember(x => x.ItemId);
+                x.MapIdMember(x => x.ItemId).SetIdGenerator(ObjectIdGenerator.Instance);
             });
         }
     }

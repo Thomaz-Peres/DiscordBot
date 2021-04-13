@@ -84,7 +84,7 @@ namespace FirstBotDiscord.Commands
                 var update2 = Builders<PlayerEntity>.Update.Set("PlayDice", true);
                 
                 
-                embed.AddField($"{ctx.User.Username} ganhou {atributtesNum} de atributos iniciais:", $"{atributtesNum}");
+                embed.AddField($"{ctx.User.Username} ganhou {atributtesNum} pontos de atributos iniciais:", $"{atributtesNum}");
                 await ctx.RespondAsync(embed.Build());
                 
                 
@@ -97,7 +97,7 @@ namespace FirstBotDiscord.Commands
             }
             else
             {
-                await ctx.RespondAsync($"{ctx.User.Mention} Você ja ganhou seus atributos, seu arrombado");
+                await ctx.RespondAsync($"{ctx.User.Mention} Você ja ganhou seus pontos de atributo, seu arrombado");
             }
         }
     }
