@@ -23,6 +23,7 @@ namespace FirstBotDiscord.Bot
         public DataContext Database { get; private set; }
         public StartsRepository StartsRepository { get; private set; }
         public ItemRepository ItemRepository { get; private set; }
+        public CharactersRepository CharactersRepository { get; private set; }
 
         public static void Main(string[] args) =>
             new Bot().RodandoBot(args).GetAwaiter().GetResult();
@@ -49,11 +50,14 @@ namespace FirstBotDiscord.Bot
             this.Database = new DataContext();
             this.StartsRepository = new StartsRepository(this.Database);
             this.ItemRepository = new ItemRepository(this.Database);
+            this.CharactersRepository = new CharactersRepository(this.Database);
+            
 
             var services = new ServiceCollection()
                 .AddSingleton(this.Database)
                 .AddSingleton(this.StartsRepository)
                 .AddSingleton(this.ItemRepository)
+                .AddSingleton(this.CharactersRepository)
                 .BuildServiceProvider();
 
 
@@ -66,8 +70,9 @@ namespace FirstBotDiscord.Bot
             });
 
             commands.RegisterCommands<StartCommands>();
-            commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<ItemCommands>();
+            commands.RegisterCommands<CharactersCommands>();
+            commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<B3Commands>();
 
             //B3Api.B3Api.B3(args);
