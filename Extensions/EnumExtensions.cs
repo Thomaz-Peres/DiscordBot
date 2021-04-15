@@ -12,9 +12,9 @@ namespace FirstBotDiscord.Extensions
     {
         public static string GetEnumDescription(this Enum value)
         {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
+            FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
 
-            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+            DescriptionAttribute[] attributes = fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
 
             if (attributes != null && attributes.Any())
             {

@@ -24,8 +24,14 @@ namespace FirstBotDiscord.Repository
 
             var embed = new DiscordEmbedBuilder();
 
+            if(player.MyCharacter.AtributesCharacter.PontosLivres == 0)
+            {
+                embed.WithDescription("Você nao possui pontos de atributos livres");
+            }
+
             if(player.MyCharacter.AtributesCharacter.PontosLivres > 0)
             {
+                embed = new DiscordEmbedBuilder();
                 embed.WithDescription($"Você possui {player.MyCharacter.AtributesCharacter.PontosLivres} pontos de atributo:");
                 embed.WithFooter("Deseja utiliza-los ?");
                 embed.WithColor(DiscordColor.Blue);
@@ -64,18 +70,162 @@ namespace FirstBotDiscord.Repository
 
                         if (waitAtributeToAsign.TimedOut) await ctx.RespondAsync("Cabou o tempo denovo irmao, para de ser burro");
 
-                        switch(waitAtributeToAsign.Result.Content)
+                        switch(waitAtributeToAsign.Result.Content.ToLower())
                         {
-                            case "Vitalidade":
+                            case "vitalidade":
                                 player.MyCharacter.AtributesCharacter.Vitalidade += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
                                 embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
                                 $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
                                 $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
                                 $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
                                 await ctx.RespondAsync(embed.Build());
+
+                                
+                                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Vitalidade", player.MyCharacter.AtributesCharacter.Vitalidade);
+                                var filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+
                                 break;
+
+                            case "sorte":
+                                player.MyCharacter.AtributesCharacter.Sorte += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
+                                embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
+                                $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
+                                $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
+                                $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
+                                await ctx.RespondAsync(embed.Build());
+
+                                
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Sorte", player.MyCharacter.AtributesCharacter.Sorte);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+
+                                break;
+
+                            case "agilidade":
+                                player.MyCharacter.AtributesCharacter.Agilidade += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
+                                embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
+                                $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
+                                $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
+                                $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
+                                
+                                await ctx.RespondAsync(embed.Build());
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Agilidade", player.MyCharacter.AtributesCharacter.Agilidade);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+                                break;
+
+                            case "carisma":
+                                player.MyCharacter.AtributesCharacter.Carisma += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
+                                embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
+                                $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
+                                $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
+                                $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
+                                await ctx.RespondAsync(embed.Build());
+
+                                
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Carisma", player.MyCharacter.AtributesCharacter.Carisma);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+                                break;
+
+                            case "força":
+                                player.MyCharacter.AtributesCharacter.Forca += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
+                                embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
+                                $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
+                                $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
+                                $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
+                                await ctx.RespondAsync(embed.Build());
+
+                                
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Forca", player.MyCharacter.AtributesCharacter.Forca);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+                                break;
+
+                            case "inteligencia":
+                                player.MyCharacter.AtributesCharacter.Inteligencia += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
+                                embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
+                                $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
+                                $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
+                                $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
+                                await ctx.RespondAsync(embed.Build());
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Inteligencia", player.MyCharacter.AtributesCharacter.Inteligencia);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+
+                                break;
+
+                            case "sabedoria":
+                                player.MyCharacter.AtributesCharacter.Sabedoria += int.Parse(quantityUp.Result.Content);
+
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithTitle("Seus atributos agora");
+                                embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte}\n" +
+                                $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma}\n" +
+                                $"Força = {player.MyCharacter.AtributesCharacter.Forca} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia}\n" +
+                                $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria}");
+                                embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres}");
+                                await ctx.RespondAsync(embed.Build());
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Sabedoria", player.MyCharacter.AtributesCharacter.Sabedoria);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
+
+                                break;
+
+                            default:
+                                embed = new DiscordEmbedBuilder();
+                                embed.WithDescription("Valor invalido, tente novamente");
+                                await ctx.RespondAsync(embed.Build());
+
+                                await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id && player.PlayerId == ctx.User.Id);
+
+                                break;
+                                
                         }
 
+                        player.MyCharacter.AtributesCharacter.PontosLivres -= int.Parse(quantityUp.Result.Content);
+                        
+                        var Update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres", player.MyCharacter.AtributesCharacter.PontosLivres);
+                        var Filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                        await _context.CollectionPlayers.UpdateOneAsync(Filter, Update);
                         break;
                 }
             }
