@@ -1,5 +1,5 @@
 server: # REST and WS server
-  port: 2333
+  port: 2600
   address: 127.0.0.1
 spring:
   main:
@@ -15,6 +15,8 @@ lavalink:
       vimeo: true
       mixer: true
       http: true
+      https: true
+      spotify: true
       local: false
     bufferDurationMs: 400
     youtubePlaylistLoadLimit: 6 # Number of pages at 100 each

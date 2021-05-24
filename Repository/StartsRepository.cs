@@ -36,7 +36,7 @@ namespace FirstBotDiscord.Repository
 
                 embed.WithThumbnail(ctx.User.AvatarUrl);
                 embed.WithColor(DiscordColor.Blue);
-                embed.WithFooter($"Conta criada com sucesso. \nUse o comando 'x' para descobrir quantos pontos de habilidade você ganhara");
+                embed.WithFooter($"Conta criada com sucesso. \nUse o comando 'pd(play Dice)' para descobrir quantos pontos de habilidade você ganhara");
 
 
                 await ctx.RespondAsync(embed.Build());

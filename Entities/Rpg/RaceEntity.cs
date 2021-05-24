@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Entities.Rpg
 {
-    public class RaceEntity
+    public enum RaceEnum
     {
-        public RaceEntity() { }
-
-        public string Human { get; set; }
-        public string Elf { get; set; }
-        public string Dwarf { get; set; }
-        public string Bestial { get; set; }
+        Human,
+        Elf,
+        Dwarf,
+        Bestial
     }
 }

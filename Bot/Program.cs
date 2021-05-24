@@ -1,4 +1,4 @@
-﻿using DSharpPlus;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
@@ -24,6 +24,7 @@ namespace FirstBotDiscord.Bot
         public StartsRepository StartsRepository { get; private set; }
         public ItemRepository ItemRepository { get; private set; }
         public CharactersRepository CharactersRepository { get; private set; }
+        public StatusRepository StatusRepository { get; private set; }
 
         public static void Main(string[] args) =>
             new Bot().RodandoBot(args).GetAwaiter().GetResult();
@@ -51,6 +52,7 @@ namespace FirstBotDiscord.Bot
             this.StartsRepository = new StartsRepository(this.Database);
             this.ItemRepository = new ItemRepository(this.Database);
             this.CharactersRepository = new CharactersRepository(this.Database);
+            this.StatusRepository = new StatusRepository(this.Database);
             
 
             var services = new ServiceCollection()
@@ -58,6 +60,7 @@ namespace FirstBotDiscord.Bot
                 .AddSingleton(this.StartsRepository)
                 .AddSingleton(this.ItemRepository)
                 .AddSingleton(this.CharactersRepository)
+                .AddSingleton(this.StatusRepository)
                 .BuildServiceProvider();
 
 
@@ -72,40 +75,31 @@ namespace FirstBotDiscord.Bot
             commands.RegisterCommands<StartCommands>();
             commands.RegisterCommands<ItemCommands>();
             commands.RegisterCommands<CharactersCommands>();
+            commands.RegisterCommands<StatusCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<B3Commands>();
 
             //B3Api.B3Api.B3(args);
 
-            var endPoint = new ConnectionEndpoint
-            {
-                Hostname = "127.0.0.1",
-                Port = 2333
-            };
+            // var endPoint = new ConnectionEndpoint
+            // {
+            //     Hostname = "127.0.0.1",
+            //     Port = 2333
+            // };
 
-            var lavaLinkConfig = new LavalinkConfiguration
-            {
-                Password = "youshallnotpass",
-                RestEndpoint = endPoint,
-                SocketEndpoint = endPoint
-            };
+            // var lavaLinkConfig = new LavalinkConfiguration
+            // {
+            //     Password = "youshallnotpass",
+            //     RestEndpoint = endPoint,
+            //     SocketEndpoint = endPoint
+            // };
 
-            var lavalink = discord.UseLavalink();
+            // var lavalink = discord.UseLavalink();
             await discord.ConnectAsync();
-            await lavalink.ConnectAsync(lavaLinkConfig);
+            // await lavalink.ConnectAsync(lavaLinkConfig);
 
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);
-        }
-
-        private Task C_InteractionCreated(DiscordClient sender, InteractionCreateEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private Task Discord_MessageReactionAdded(DiscordClient sender, MessageReactionAddEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

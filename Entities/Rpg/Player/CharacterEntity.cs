@@ -9,8 +9,8 @@ namespace FirstBotDiscord.Entities.Rpg.Player
         public InventoryEntity Inventory { get; set; } = new InventoryEntity();
         public MoneyEntity Money { get; set; } = new MoneyEntity();
         public AtributesEntity AtributesCharacter { get; set; } = new AtributesEntity();
-        public RaceEntity Race { get; set; } = new RaceEntity();
-        public ClassEntity MyClass { get; set; } = new ClassEntity();
+        public RaceEnum Race { get; set; }
+        public ClassEnum MyClass { get; set; }
 
         public StatePointsEntity LifePoints { get; set; } = new StatePointsEntity();
         public StatePointsEntity ManaPoints { get; set; } = new StatePointsEntity();

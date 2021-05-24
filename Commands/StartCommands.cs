@@ -25,7 +25,7 @@ namespace FirstBotDiscord.Commands
             
 
         [Command("createPlayer")]
-        [Aliases("cP")]
+        [Aliases("cp")]
         [Description("Cria um Player")]
         public async Task CreatePlayer(CommandContext ctx)
         {
