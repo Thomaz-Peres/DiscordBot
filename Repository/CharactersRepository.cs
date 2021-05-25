@@ -38,7 +38,7 @@ namespace FirstBotDiscord.Repository
                 await ctx.RespondAsync(embed.Build());
 
                 var YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id && player.PlayerId == ctx.User.Id);
-                if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo, começa denovo ai");
+                if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo, começa de novo ai");
 
                 switch(YesOrNot.Result.Content.ToString().Trim())
                 {
@@ -68,7 +68,7 @@ namespace FirstBotDiscord.Repository
 
                         var waitAtributeToAsign = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id && player.PlayerId == ctx.User.Id);
 
-                        if (waitAtributeToAsign.TimedOut) await ctx.RespondAsync("Cabou o tempo denovo irmao, para de ser burro");
+                        if (waitAtributeToAsign.TimedOut) await ctx.RespondAsync("Cabou o tempo de novo irmao, para de ser burro");
 
                         switch(waitAtributeToAsign.Result.Content.ToLower())
                         {

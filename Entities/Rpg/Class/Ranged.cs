@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Entities.Rpg.Class
 {
-    public class Ranged : ClassEntity
+    public class Ranged // : ClassEntity
     {
     }
 }

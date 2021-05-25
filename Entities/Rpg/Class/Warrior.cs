@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Entities.Rpg.Class
 {
-    public class Warrior : ClassEntity
+    public class Warrior // : ClassEntity
     {
     }
 }

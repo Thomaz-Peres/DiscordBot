@@ -38,6 +38,8 @@ namespace FirstBotDiscord.Repository
             embed.AddField("Mortes:", character.MyCharacter.Deaths.ToString(), true);
             embed.AddField("Players abatidos:", character.MyCharacter.PlayersKill.ToString(), true);
 
+            embed.AddField("Localização atual:", character.MyCharacter.CurrentLocalization.ChannelName);
+
             embed.AddField("Atributos livres:", character.MyCharacter.AtributesCharacter.PontosLivres.ToString());
 
             embed.WithFooter("Se possui atributos livres, use o comando 'ap' para utiliza-los");
