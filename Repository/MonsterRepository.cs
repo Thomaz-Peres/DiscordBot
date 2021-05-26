@@ -16,7 +16,7 @@ namespace FirstBotDiscord.Repository
         public MonsterRepository(DataContext context) =>
             _context = context;
 
-        public async Task CreateMonster(CommandContext ctx, string monsterName, int monsterLife, int monsterMana)
+        public async Task CreateMonster(CommandContext ctx, string monsterName, int level, int monsterLife, int monsterMana)
         {
             var monster = new BaseMonstersEntity();
 
@@ -25,12 +25,14 @@ namespace FirstBotDiscord.Repository
             var interactivity = ctx.Client.GetInteractivity();
 
             monster.MonsterName = monsterName;
+            monster.Level = level;
             monster.MonsterLife = monsterLife;
             monster.MonsterMana = monsterMana;
             //monster.Spawn = spawnTime;
 
             embed.WithTitle("Novo monstro:");
-            embed.AddField("Nome:", monster.MonsterName);
+            embed.AddField("Nome:", monster.MonsterName, true);
+            embed.AddField("Level:", monster.Level.ToString(), true);
 
             embed.AddField("Vida do monstro:", monster.MonsterLife.ToString(), true);
             embed.AddField("Mana do monstro:", monster.MonsterMana.ToString(), true);
@@ -85,13 +87,13 @@ namespace FirstBotDiscord.Repository
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
-                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ?");
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
                         var YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
-
+                        
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim")
-                            upando = true;
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
                         else upando = false;
 
                         break;
@@ -105,8 +107,17 @@ namespace FirstBotDiscord.Repository
                         $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
                         $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
-                        embed.WithFooter($"Pontos livres = {monster.MonsterAtributes.PontosLivres}");
                         await ctx.RespondAsync(embed.Build());
+
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
+                        YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
+
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
+                        else upando = false;
 
                         break;
 
@@ -119,9 +130,17 @@ namespace FirstBotDiscord.Repository
                         $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
                         $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
-                        embed.WithFooter($"Pontos livres = {monster.MonsterAtributes.PontosLivres}");
-
                         await ctx.RespondAsync(embed.Build());
+
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
+                        YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
+
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
+                        else upando = false;
                         break;
 
                     case "carisma":
@@ -133,9 +152,17 @@ namespace FirstBotDiscord.Repository
                         $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
                         $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
-                        embed.WithFooter($"Pontos livres = {monster.MonsterAtributes.PontosLivres}");
                         await ctx.RespondAsync(embed.Build());
 
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
+                        YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
+
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
+                        else upando = false;
 
                         break;
 
@@ -148,9 +175,17 @@ namespace FirstBotDiscord.Repository
                         $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
                         $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
-                        embed.WithFooter($"Pontos livres = {monster.MonsterAtributes.PontosLivres}");
                         await ctx.RespondAsync(embed.Build());
 
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
+                        YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
+
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
+                        else upando = false;
 
                         break;
 
@@ -163,9 +198,17 @@ namespace FirstBotDiscord.Repository
                         $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
                         $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
-                        embed.WithFooter($"Pontos livres = {monster.MonsterAtributes.PontosLivres}");
                         await ctx.RespondAsync(embed.Build());
 
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
+                        YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
+
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
+                        else upando = false;
 
                         break;
 
@@ -178,15 +221,23 @@ namespace FirstBotDiscord.Repository
                         $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
                         $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
-                        embed.WithFooter($"Pontos livres = {monster.MonsterAtributes.PontosLivres}");
                         await ctx.RespondAsync(embed.Build());
 
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
+                        await ctx.RespondAsync(embed.Build());
+                        YesOrNot = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
+
+                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
+                        else upando = false;
 
                         break;
 
                     default:
                         embed = new DiscordEmbedBuilder();
-                        embed.WithDescription("Valor invalido, tente novamente");
+                        embed.WithDescription("Escolha invalida, tente novamente");
                         await ctx.RespondAsync(embed.Build());
 
                         await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
