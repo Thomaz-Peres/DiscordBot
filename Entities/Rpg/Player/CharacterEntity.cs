@@ -12,6 +12,7 @@ namespace FirstBotDiscord.Entities.Rpg.Player
         public RaceEnum Race { get; set; }
         public ClassEnum MyClass { get; set; }
 
+        public StatePointsEntity Experience { get; private set; } = new StatePointsEntity();
         public StatePointsEntity LifePoints { get; set; } = new StatePointsEntity();
         public StatePointsEntity ManaPoints { get; set; } = new StatePointsEntity();
         public StatePointsEntity KarmaPoints { get; set; } = new StatePointsEntity();

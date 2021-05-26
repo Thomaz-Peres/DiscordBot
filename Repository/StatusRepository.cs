@@ -30,6 +30,7 @@ namespace FirstBotDiscord.Repository
             embed.AddField("Vida:", character.MyCharacter.LifePoints.CurrentValuePoints.ToString(), true);
             embed.AddField("Mana:", character.MyCharacter.ManaPoints.CurrentValuePoints.ToString(), true);
             embed.AddField("Karma:", character.MyCharacter.KarmaPoints.CurrentValuePoints.ToString(), true);
+            embed.AddField("Experiencia:", character.MyCharacter.Experience.CurrentValuePoints.ToString());
 
             embed.AddField("Sua raça:", character.MyCharacter.Race.ToString());
             embed.AddField("Sua classe atual:", character.MyCharacter.MyClass.ToString());

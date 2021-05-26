@@ -33,6 +33,7 @@ namespace FirstBotDiscord.Repository
             embed.WithTitle("Novo monstro:");
             embed.AddField("Nome:", monster.MonsterName, true);
             embed.AddField("Level:", monster.Level.ToString(), true);
+            // embed.AddField(" ", " ", true);
 
             embed.AddField("Vida do monstro:", monster.MonsterLife.ToString(), true);
             embed.AddField("Mana do monstro:", monster.MonsterMana.ToString(), true);
@@ -40,15 +41,8 @@ namespace FirstBotDiscord.Repository
             //embed.AddField("Tempo de spawn:", monster.Spawn.ToString());
             embed.WithFooter("Veja os comando abaixo para adicionar os atributos");
             await ctx.RespondAsync(embed.Build());
-            //_context.CollectionMonsters.InsertOne(monster);
-
-            embed = new DiscordEmbedBuilder();
-            embed.WithDescription("Quantos pontos de atributo você deseja atribuir ? Min. 1");
-            await ctx.RespondAsync(embed.Build());
-            var quantityUp = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
-
-            if (quantityUp.TimedOut) await ctx.RespondAsync("Cabou o tempo");
             
+                        
             embed = new DiscordEmbedBuilder();
             embed.WithTitle("Estes são os atributos do monstro");
             embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
@@ -62,8 +56,16 @@ namespace FirstBotDiscord.Repository
             while(upando == true)
             {
                 embed = new DiscordEmbedBuilder();
+                embed.WithDescription("Quantos pontos de atributo você deseja atribuir ? Min. 1");
+                await ctx.RespondAsync(embed.Build());
+                var quantityUp = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                if (quantityUp.TimedOut) await ctx.RespondAsync("Cabou o tempo");
+
+                embed = new DiscordEmbedBuilder();
                 embed.WithTitle("Qual dos atributos abaixo você deseja upar ?");
-                embed.WithDescription($"Vitalidade -- Sorte\n" +
+                embed.WithDescription(
+                    $"Vitalidade -- Sorte\n" +
                     $"Agilidade -- Carisma\n" +
                     $"Forca -- Inteligencia\n" +
                     $"Sabedoria");
@@ -93,8 +95,7 @@ namespace FirstBotDiscord.Repository
                         
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
 
                         break;
 
@@ -116,8 +117,7 @@ namespace FirstBotDiscord.Repository
 
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
 
                         break;
 
@@ -139,8 +139,8 @@ namespace FirstBotDiscord.Repository
 
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
+
                         break;
 
                     case "carisma":
@@ -161,8 +161,7 @@ namespace FirstBotDiscord.Repository
 
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
 
                         break;
 
@@ -184,8 +183,7 @@ namespace FirstBotDiscord.Repository
 
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
 
                         break;
 
@@ -207,8 +205,7 @@ namespace FirstBotDiscord.Repository
 
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
 
                         break;
 
@@ -230,8 +227,7 @@ namespace FirstBotDiscord.Repository
 
                         if (YesOrNot.TimedOut) await ctx.RespondAsync("Cabou o tempo burro");
 
-                        if (YesOrNot.Result.Content.ToLower() == "sim") upando = true;
-                        else upando = false;
+                        upando = YesOrNot.Result.Content.ToLower() == "sim" ? true : false;
 
                         break;
 
@@ -240,11 +236,28 @@ namespace FirstBotDiscord.Repository
                         embed.WithDescription("Escolha invalida, tente novamente");
                         await ctx.RespondAsync(embed.Build());
 
-                        await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+                        upando = true;
+
+                        //embed = new DiscordEmbedBuilder();
+                        //embed.WithTitle("Qual dos atributos abaixo você deseja upar ?");
+                        //embed.WithDescription(
+                        //    $"Vitalidade -- Sorte\n" +
+                        //    $"Agilidade -- Carisma\n" +
+                        //    $"Forca -- Inteligencia\n" +
+                        //    $"Sabedoria");
+                        //await ctx.RespondAsync(embed.Build());
+
+                        //waitAtributeToAsign = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                        //if (waitAtributeToAsign.TimedOut) await ctx.RespondAsync("Cabou o tempo de novo irmão, para de ser burro");
 
                         break;
                 }
             }
+            if (upando == false) 
+                await ctx.RespondAsync("Monstro completo 👾");
+            
+            await _context.CollectionMonsters.InsertOneAsync(monster);
         }
     }
 }

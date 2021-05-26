@@ -18,9 +18,9 @@ namespace FirstBotDiscord.Repository
 
         public async Task AssignPointsCharacter(DiscordUser user, CommandContext ctx)
         {
-            var player = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
-
             var interactivity = ctx.Client.GetInteractivity();
+
+            var player = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
 
             var embed = new DiscordEmbedBuilder();
 
@@ -33,7 +33,7 @@ namespace FirstBotDiscord.Repository
             {
                 embed = new DiscordEmbedBuilder();
                 embed.WithDescription($"Você possui {player.MyCharacter.AtributesCharacter.PontosLivres} pontos de atributo:");
-                embed.WithFooter("Deseja utiliza-los ?");
+                embed.WithFooter("Deseja utiliza-los ? Responda sim ou nao");
                 embed.WithColor(DiscordColor.Blue);
                 await ctx.RespondAsync(embed.Build());
 
@@ -226,7 +226,22 @@ namespace FirstBotDiscord.Repository
                         var Filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
 
                         await _context.CollectionPlayers.UpdateOneAsync(Filter, Update);
-                        break;
+                    break;
+                    
+                    case "nao":
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Seus pontos não vão ser utilizados nem descontados, sinta-se a vontade para fazer o que quiser\n Na proxima chama apenas se for usar eles carai");
+
+                        await ctx.RespondAsync(embed.Build());
+                    break;
+
+                    default:
+                        embed = new DiscordEmbedBuilder();
+                        embed.WithDescription("Apenas sim ou nao meu mano, larga de ser noia, ta escrito na pergunta\n Se escreveu errado esqueça a linha de cima");
+
+                        await ctx.RespondAsync(embed.Build());
+                    break;
+
                 }
             }
         }

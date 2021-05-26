@@ -18,6 +18,7 @@ namespace FirstBotDiscord.Commands
             _repository = repository;
 
         [Command("Status")]
+        [Aliases("s")]
         [Description("Visualiza o status do personagem")]
         public async Task CharacterStatus(CommandContext ctx)
         {
