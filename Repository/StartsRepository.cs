@@ -12,8 +12,8 @@ namespace FirstBotDiscord.Repository
     public class StartsRepository
     {
         private readonly DataContext _context;
-        public StartsRepository(DataContext context)
-            => _context = context;
+        public StartsRepository(DataContext context)=>
+            _context = context;
 
         public async Task CreateUser(DiscordUser user, CommandContext ctx)
         {
@@ -49,7 +49,6 @@ namespace FirstBotDiscord.Repository
                 await ctx.RespondAsync(embed.Build());
                 //return null;
             }
-
         }
 
         public async Task PlayNewUserDice(DiscordUser user, CommandContext ctx)
@@ -59,7 +58,7 @@ namespace FirstBotDiscord.Repository
 
             Random random = new Random();
 
-            int atributtesNum = random.Next(1, 6);
+            int atributtesNum = random.Next(1, 20);
 
 
             if (player.PlayerId == ctx.User.Id && player.PlayDice == false)
@@ -83,7 +82,6 @@ namespace FirstBotDiscord.Repository
             {
                 await ctx.RespondAsync($"{ctx.User.Mention} Você ja ganhou seus pontos de atributo, seu arrombado");
             }
-
         }
     }
 }

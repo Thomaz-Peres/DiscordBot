@@ -45,10 +45,10 @@ namespace FirstBotDiscord.Repository
                         
             embed = new DiscordEmbedBuilder();
             embed.WithTitle("Estes são os atributos do monstro");
-            embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+            embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
             await ctx.RespondAsync(embed.Build());
 
             var upando = true;
@@ -78,14 +78,14 @@ namespace FirstBotDiscord.Repository
                 switch(waitAtributeToAsign.Result.Content.ToLower())
                 {
                     case "vitalidade":
-                        monster.MonsterAtributes.Vitalidade += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Vitalidade.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
@@ -100,14 +100,14 @@ namespace FirstBotDiscord.Repository
                         break;
 
                     case "sorte":
-                        monster.MonsterAtributes.Sorte += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Sorte.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
@@ -122,14 +122,14 @@ namespace FirstBotDiscord.Repository
                         break;
 
                     case "agilidade":
-                        monster.MonsterAtributes.Agilidade += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Agilidade.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
@@ -144,14 +144,14 @@ namespace FirstBotDiscord.Repository
                         break;
 
                     case "carisma":
-                        monster.MonsterAtributes.Carisma += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Carisma.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
@@ -166,14 +166,14 @@ namespace FirstBotDiscord.Repository
                         break;
 
                     case "força":
-                        monster.MonsterAtributes.Forca += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Forca.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
@@ -188,14 +188,14 @@ namespace FirstBotDiscord.Repository
                         break;
 
                     case "inteligencia":
-                        monster.MonsterAtributes.Inteligencia += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Inteligencia.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
@@ -210,14 +210,14 @@ namespace FirstBotDiscord.Repository
                         break;
 
                     case "sabedoria":
-                        monster.MonsterAtributes.Sabedoria += int.Parse(quantityUp.Result.Content);
+                        monster.MonsterAtributes.Sabedoria.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Seus atributos agora");
-                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade} -- Sorte = {monster.MonsterAtributes.Sorte}\n" +
-                        $"Agilidade = {monster.MonsterAtributes.Agilidade} -- Carisma = {monster.MonsterAtributes.Carisma}\n" +
-                        $"Força = {monster.MonsterAtributes.Forca} -- Inteligencia = {monster.MonsterAtributes.Inteligencia}\n" +
-                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria}");
+                        embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                        $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                        $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                        $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();

@@ -4,27 +4,27 @@
     {
 
         // Aumenta o ataque fisico minimo e maximo do jogador
-        public int Forca { get; set; } = 0;
+        public StatePointsEntity Forca { get; set; }
 
         // Aumenta o ataque magico minimo e maximo do jogador
-        public int Inteligencia { get; set; } = 0;
+        public StatePointsEntity Inteligencia { get; set; }
 
         // Aumenta a vida maxima do jogador, e regeneração de vida
-        public int Vitalidade { get; set; } = 0;
+        public StatePointsEntity Vitalidade { get; set; }
         
         // Aumenta a chance de desvio contra um ataque
-        public int Agilidade { get; set; } = 0;
+        public StatePointsEntity Agilidade { get; set; }
 
         // Aumenta a persuasão do personagem
-        public int Carisma { get; set; } = 0;
+        public StatePointsEntity Carisma { get; set; }
 
         // Aumento de regeneração de mana
-        public int Sabedoria { get; set; } = 0;
+        public StatePointsEntity Sabedoria { get; set; }
 
         // Aumenta a chance de acertar o ataque (caso o numero do dado for muito bom, pode dar critico, ou aumentar a chance de dar um critico)
-        public int Sorte { get; set; } = 0;
+        public StatePointsEntity Sorte { get; set; }
 
         // Pontos de atributo livre (não usados)
-        public int PontosLivres { get; set; } = 0;
+        public StatePointsEntity PontosLivres { get; set; }
     }
 }
