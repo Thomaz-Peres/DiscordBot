@@ -1,6 +1,5 @@
 ﻿using FirstBotDiscord.Entities.Rpg.Class;
-using System;
-using System.ComponentModel.DataAnnotations;
+using FirstBotDiscord.Entities.Rpg.UsefulnessOfPoints;
 
 namespace FirstBotDiscord.Entities.Rpg.Player
 {
@@ -13,16 +12,16 @@ namespace FirstBotDiscord.Entities.Rpg.Player
         public RaceEnum Race { get; set; }
         public ClassEnum MyClass { get; set; }
 
-        public StatePointsEntity Experience { get; set; }
-        public StatePointsEntity LifePoints { get; set; }
-        public StatePointsEntity ManaPoints { get; set; }
-        public StatePointsEntity KarmaPoints { get; set; }
-        public float PhysicalAttack { get; set; }
-        public float MagicAttack { get; set; }
-        public float Armor { get; set; }
-        public float MagicResistence { get; set; }
-        public float Persuation { get; set; }
-        public float Luck { get; set; }
+        public LevelEntity Experience { get; set; }
+        public StatusOfPointsEntity LifePoints { get; set; }
+        public StatusOfPointsEntity ManaPoints { get; set; }
+        public StatusOfPointsEntity KarmaPoints { get; set; }
+        public double PhysicalAttack { get; set; }
+        public double MagicAttack { get; set; }
+        public double Armor { get; set; }
+        public double MagicResistence { get; set; }
+        public double Persuation { get; set; }
+        public double Luck { get; set; }
 
         public LocalizationEntity CurrentLocalization { get; set; } = new LocalizationEntity();
 

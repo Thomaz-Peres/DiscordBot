@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Commands
 {
-    public class StatusCommands : BaseCommandModule
+    public class AtributesCommands : BaseCommandModule
     {
-        private readonly StatusRepository _repository;
+        private readonly AtributesRepository _repository;
 
-        public StatusCommands(StatusRepository repository) =>
+        public AtributesCommands(AtributesRepository repository) =>
             _repository = repository;
 
         [Command("Status")]
         [Aliases("s")]
-        [Description("Visualiza o status do personagem")]
+        [Description("Visualiza os atributos do personagem")]
         public async Task CharacterStatus(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
 
-            await _repository.CharacterStatus(ctx, ctx.User);
+            await _repository.CharacterAtributes(ctx, ctx.User);
         }
     }
 }

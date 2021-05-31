@@ -60,10 +60,9 @@ namespace FirstBotDiscord.Repository
 
             int atributtesNum = random.Next(1, 20);
 
-
             if (player.PlayerId == ctx.User.Id && player.PlayDice == false)
             {
-                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres", atributtesNum);
+                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints", atributtesNum);
                 var update2 = Builders<PlayerEntity>.Update.Set("PlayDice", true);
 
 
