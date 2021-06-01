@@ -4,7 +4,6 @@ using DSharpPlus.Interactivity.Extensions;
 using FirstBotDiscord.Database;
 using FirstBotDiscord.Entities.Rpg.Player;
 using MongoDB.Driver;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Repository
@@ -73,7 +72,7 @@ namespace FirstBotDiscord.Repository
                         switch(waitAtributeToAsign.Result.Content.ToLower())
                         {
                             case "vitalidade":
-                                player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -90,10 +89,13 @@ namespace FirstBotDiscord.Repository
 
                                 await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
+                                var addLife = new StatusRepository(_context);
+                                addLife.AddLifeStatus(double.Parse(quantityUp.Result.Content), ctx);
+
                                 break;
 
                             case "sorte":
-                                player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -113,7 +115,7 @@ namespace FirstBotDiscord.Repository
                                 break;
 
                             case "agilidade":
-                                player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -132,7 +134,7 @@ namespace FirstBotDiscord.Repository
                                 break;
 
                             case "carisma":
-                                player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -151,7 +153,7 @@ namespace FirstBotDiscord.Repository
                                 break;
 
                             case "força":
-                                player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -170,7 +172,7 @@ namespace FirstBotDiscord.Repository
                                 break;
 
                             case "inteligencia":
-                                player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -190,7 +192,7 @@ namespace FirstBotDiscord.Repository
                                 break;
 
                             case "sabedoria":
-                                player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints += int.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -220,7 +222,7 @@ namespace FirstBotDiscord.Repository
                                 
                         }
 
-                        player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= int.Parse(quantityUp.Result.Content);
+                        player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
                         
                         var Update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints", player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints);
                         var Filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
