@@ -12,16 +12,16 @@ namespace FirstBotDiscord.Entities.Rpg.Player
         public RaceEnum Race { get; set; }
         public ClassEnum MyClass { get; set; }
 
-        public LevelEntity Experience { get; set; }
-        public StatusOfPointsEntity LifePoints { get; set; }
-        public StatusOfPointsEntity ManaPoints { get; set; }
-        public StatusOfPointsEntity KarmaPoints { get; set; }
-        public double PhysicalAttack { get; set; }
-        public double MagicAttack { get; set; }
-        public double Armor { get; set; }
-        public double MagicResistence { get; set; }
-        public double Persuation { get; set; }
-        public double Luck { get; set; }
+        public LevelEntity Experience { get; set; } = new LevelEntity();
+        public StatusOfPointsEntity LifePoints { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity ManaPoints { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity KarmaPoints { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity PhysicalAttack { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity MagicAttack { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity Armor { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity MagicResistence { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity Persuation { get; set; } = new StatusOfPointsEntity();
+        public StatusOfPointsEntity Luck { get; set; } = new StatusOfPointsEntity();
 
         public LocalizationEntity CurrentLocalization { get; set; } = new LocalizationEntity();
 

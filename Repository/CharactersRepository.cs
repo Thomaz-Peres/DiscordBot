@@ -73,6 +73,15 @@ namespace FirstBotDiscord.Repository
                         {
                             case "vitalidade":
                                 player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+                                                                
+                                var addLife = new StatusRepository(_context);
+                                addLife.AddLifeStatus(player);
+                                                                
+                                var update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                var filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -82,20 +91,19 @@ namespace FirstBotDiscord.Repository
                                 $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints}");
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
                                 await ctx.RespondAsync(embed.Build());
-
-                                
-                                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints);
-                                var filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
-
-                                var addLife = new StatusRepository(_context);
-                                addLife.AddLifeStatus(double.Parse(quantityUp.Result.Content), ctx);
 
                                 break;
 
                             case "sorte":
                                 player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -105,17 +113,19 @@ namespace FirstBotDiscord.Repository
                                 $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints}");
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
                                 await ctx.RespondAsync(embed.Build());
-
-                                
-                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints);
-                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 break;
 
                             case "agilidade":
                                 player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -124,17 +134,20 @@ namespace FirstBotDiscord.Repository
                                 $"Força = {player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints}\n" +
                                 $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints}");
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
-                                
                                 await ctx.RespondAsync(embed.Build());
 
-                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints);
-                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
                                 break;
 
                             case "carisma":
                                 player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -145,15 +158,18 @@ namespace FirstBotDiscord.Repository
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
                                 await ctx.RespondAsync(embed.Build());
 
-                                
-                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints);
-                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
                                 break;
 
                             case "força":
                                 player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -164,15 +180,18 @@ namespace FirstBotDiscord.Repository
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
                                 await ctx.RespondAsync(embed.Build());
 
-                                
-                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Forca.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints);
-                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
                                 break;
 
                             case "inteligencia":
                                 player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -182,17 +201,19 @@ namespace FirstBotDiscord.Repository
                                 $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints}");
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
                                 await ctx.RespondAsync(embed.Build());
-
-
-                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints);
-                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 break;
 
                             case "sabedoria":
                                 player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
+                                player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
+
+
+
+                                update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
+                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
+
+                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
@@ -203,32 +224,16 @@ namespace FirstBotDiscord.Repository
                                 embed.WithFooter($"Pontos livres = {player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints}");
                                 await ctx.RespondAsync(embed.Build());
 
-
-                                update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints", player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints);
-                                filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                                await _context.CollectionPlayers.UpdateOneAsync(filter, update);
-
                                 break;
 
                             default:
                                 embed = new DiscordEmbedBuilder();
-                                embed.WithDescription("Valor invalido, tente novamente");
+                                embed.WithDescription("Valor invalido, use o comando novamente");
                                 await ctx.RespondAsync(embed.Build());
 
-                                await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id && player.PlayerId == ctx.User.Id);
-
-                                break;
-                                
-                        }
-
-                        player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
-                        
-                        var Update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints", player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints);
-                        var Filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
-
-                        await _context.CollectionPlayers.UpdateOneAsync(Filter, Update);
-                    break;
+                                break;                                
+                        }                        
+                        break;
                     
                     case "nao":
                         embed = new DiscordEmbedBuilder();
@@ -239,7 +244,7 @@ namespace FirstBotDiscord.Repository
 
                     default:
                         embed = new DiscordEmbedBuilder();
-                        embed.WithDescription("Apenas sim ou nao meu mano, larga de ser noia, ta escrito na pergunta\n Se escreveu sem querer esqueça a linha de cima");
+                        embed.WithDescription("Apenas sim ou nao meu mano, larga de ser noia, ta escrito na pergunta\n Se escreveu sem querer esqueça a linha de cima\n envie o comando novamente");
 
                         await ctx.RespondAsync(embed.Build());
                     break;

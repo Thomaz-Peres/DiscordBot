@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using FirstBotDiscord.Database;
+using FirstBotDiscord.Entities.Rpg.Player;
 using MongoDB.Driver;
 
 namespace FirstBotDiscord.Repository
@@ -11,14 +12,16 @@ namespace FirstBotDiscord.Repository
         public StatusRepository(DataContext context) =>
             _context = context;
 
-        public async void AddLifeStatus(double lifeValue, CommandContext ctx)
+        public PlayerEntity AddLifeStatus(PlayerEntity player)
         {
-            var player = await _context.CollectionPlayers.Find(x => x.PlayerId == ctx.User.Id).FirstOrDefaultAsync();
-
             if(player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints > 0)
             {
+                player.MyCharacter.LifePoints.CurrentValuePoints = player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints * 1.25;
+                player.MyCharacter.LifePoints.MaxValuePoints = player.MyCharacter.LifePoints.CurrentValuePoints;
 
+                
             }
+            return player;
         }
     }
 }

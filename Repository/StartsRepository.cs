@@ -20,7 +20,7 @@ namespace FirstBotDiscord.Repository
             var embed = new DiscordEmbedBuilder();
             var player = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
 
-            if (player == null)
+           if (player == null)
             {
                 player = new PlayerEntity
                 {
@@ -38,16 +38,12 @@ namespace FirstBotDiscord.Repository
                 embed.WithColor(DiscordColor.Blue);
                 embed.WithFooter($"Conta criada com sucesso. \nUse o comando 'pd(play Dice)' para descobrir quantos pontos de habilidade você ganhara");
 
-
                 await ctx.RespondAsync(embed.Build());
-                //return player;
-            }
-
-            if (player.PlayerId == ctx.User.Id)
+            } else
             {
+                embed = new DiscordEmbedBuilder();
                 embed.WithDescription("Você ja possui uma conta, seu noia");
                 await ctx.RespondAsync(embed.Build());
-                //return null;
             }
         }
 
