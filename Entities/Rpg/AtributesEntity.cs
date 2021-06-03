@@ -5,10 +5,10 @@ namespace FirstBotDiscord.Entities.Rpg
     public class AtributesEntity
     {
 
-        // Aumenta o ataque fisico minimo e maximo do jogador
+        // Aumenta o ataque fisico maximo do jogador
         public StatusOfAttributePoints Forca { get; set; } = new StatusOfAttributePoints();
 
-        // Aumenta o ataque magico minimo e maximo do jogador
+        // Aumenta o ataque magico maximo do jogador, e um pouco do ataque magico e maximo
         public StatusOfAttributePoints Inteligencia { get; set; } = new StatusOfAttributePoints();
 
         // Aumenta a vida maxima do jogador, e regeneração de vida
@@ -20,10 +20,10 @@ namespace FirstBotDiscord.Entities.Rpg
         // Aumenta a persuasão do personagem
         public StatusOfAttributePoints Carisma { get; set; } = new StatusOfAttributePoints();
 
-        // Aumento de regeneração de mana
+        // Aumento de regeneração de mana e Mana maxima do jogador, e um pouco do ataque magico maximo
         public StatusOfAttributePoints Sabedoria { get; set; } = new StatusOfAttributePoints();
 
-        // Aumenta a chance de acertar o ataque (caso o numero do dado for muito bom, pode dar critico, ou aumentar a chance de dar um critico)
+        // Aumenta os atributos minimos na batalha, melhorando sua chance, entre os valores minimos e maximos
         public StatusOfAttributePoints Sorte { get; set; } = new StatusOfAttributePoints();
 
         // Pontos de atributo livre (não usados)

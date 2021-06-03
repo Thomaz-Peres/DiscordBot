@@ -27,9 +27,9 @@ namespace FirstBotDiscord.Repository
             embed.WithThumbnail(user.AvatarUrl);
 
             embed.AddField("Name:", character.NamePlayer);
-            embed.AddField("Vida:", character.MyCharacter.LifePoints.CurrentValuePoints.ToString(), true);
-            embed.AddField("Mana:", character.MyCharacter.ManaPoints.CurrentValuePoints.ToString(), true);
-            embed.AddField("Karma:", character.MyCharacter.KarmaPoints.CurrentValuePoints.ToString(), true);
+            embed.AddField("Vida:", character.MyCharacter.LifePoints.CurrentOrMinValuePoints.ToString(), true);
+            embed.AddField("Mana:", character.MyCharacter.ManaPoints.CurrentOrMinValuePoints.ToString(), true);
+            embed.AddField("Karma:", character.MyCharacter.KarmaPoints.CurrentOrMinValuePoints.ToString(), true);
             embed.AddField("Experiencia:", character.MyCharacter.Experience.CurrentExperience.ToString());
 
             embed.AddField("Sua raça:", character.MyCharacter.Race.ToString());

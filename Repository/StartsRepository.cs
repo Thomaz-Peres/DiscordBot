@@ -58,7 +58,7 @@ namespace FirstBotDiscord.Repository
 
             if (player.PlayerId == ctx.User.Id && player.PlayDice == false)
             {
-                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints", atributtesNum);
+                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentOrMinValuePoints", atributtesNum);
                 var update2 = Builders<PlayerEntity>.Update.Set("PlayDice", true);
 
 

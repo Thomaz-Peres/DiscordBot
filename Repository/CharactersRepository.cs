@@ -42,6 +42,7 @@ namespace FirstBotDiscord.Repository
                 switch(YesOrNot.Result.Content.ToString().Trim())
                 {
                     case "sim":
+                        var statusRepository = new StatusRepository(_context);
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Quantos pontos de atributo você deseja atribuir ? Min. 1");
                         await ctx.RespondAsync(embed.Build());
@@ -74,9 +75,8 @@ namespace FirstBotDiscord.Repository
                             case "vitalidade":
                                 player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
-                                                                
-                                var addLife = new StatusRepository(_context);
-                                addLife.AddLifeStatus(player);
+
+                                statusRepository.AddLifeStatus(player);
                                                                 
                                 var update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 var filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
@@ -98,7 +98,7 @@ namespace FirstBotDiscord.Repository
                                 player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
 
-
+                                statusRepository.AddLuckStatus(player);
 
                                 update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
@@ -120,7 +120,7 @@ namespace FirstBotDiscord.Repository
                                 player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
 
-
+                                statusRepository.AddEvasionStatus(player);
 
                                 update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
@@ -142,7 +142,7 @@ namespace FirstBotDiscord.Repository
                                 player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
 
-
+                                statusRepository.AddPersuationStatus(player);
 
                                 update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
@@ -164,7 +164,7 @@ namespace FirstBotDiscord.Repository
                                 player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
 
-
+                                statusRepository.AddPhysicalAttackStatus(player);
 
                                 update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
@@ -186,7 +186,7 @@ namespace FirstBotDiscord.Repository
                                 player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
 
-
+                                statusRepository.AddMagicAttackStatus(player);
 
                                 update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
@@ -208,7 +208,7 @@ namespace FirstBotDiscord.Repository
                                 player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints += double.Parse(quantityUp.Result.Content);
                                 player.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints -= double.Parse(quantityUp.Result.Content);
 
-
+                                statusRepository.AddManaStatus(player);
 
                                 update = Builders<PlayerEntity>.Update.Set("MyCharacter", player.MyCharacter);
                                 filter = Builders<PlayerEntity>.Filter.Eq(x => x.PlayerId, ctx.User.Id);
