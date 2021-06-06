@@ -57,7 +57,6 @@ namespace FirstBotDiscord.Bot
             this.MonsterRepository = new MonsterRepository(this.Database);
 
 
-
             var services = new ServiceCollection()
                 .AddSingleton(this.Database)
                 .AddSingleton(this.StartsRepository)
@@ -77,9 +76,9 @@ namespace FirstBotDiscord.Bot
             });
 
             commands.RegisterCommands<StartCommands>();
+            commands.RegisterCommands<AssignAtributtesCharacter>();
+            commands.RegisterCommands<StatusCommands>();
             commands.RegisterCommands<ItemCommands>();
-            commands.RegisterCommands<CharactersCommands>();
-            commands.RegisterCommands<AtributesCommands>();
             commands.RegisterCommands<MonsterCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<B3Commands>();

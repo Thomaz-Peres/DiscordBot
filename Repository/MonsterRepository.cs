@@ -16,7 +16,7 @@ namespace FirstBotDiscord.Repository
         public MonsterRepository(DataContext context) =>
             _context = context;
 
-        public async Task CreateMonster(CommandContext ctx, string monsterName, int level, int monsterLife, int monsterMana)
+        public async Task CreateMonster(CommandContext ctx, string monsterName, int level)
         {
             var monster = new BaseMonstersEntity();
 
@@ -26,29 +26,17 @@ namespace FirstBotDiscord.Repository
 
             monster.MonsterName = monsterName;
             monster.Level = level;
-            monster.MonsterLife = monsterLife;
-            monster.MonsterMana = monsterMana;
             //monster.Spawn = spawnTime;
 
             embed.WithTitle("Novo monstro:");
             embed.AddField("Nome:", monster.MonsterName, true);
             embed.AddField("Level:", monster.Level.ToString(), true);
-            // embed.AddField(" ", " ", true);
 
-            embed.AddField("Vida do monstro:", monster.MonsterLife.ToString(), true);
-            embed.AddField("Mana do monstro:", monster.MonsterMana.ToString(), true);
+            embed.AddField("Vida do monstro:", monster.MonsterLifePoints.ToString(), true);
+            embed.AddField("Mana do monstro:", monster.MonsterManaPoints.ToString(), true);
 
             //embed.AddField("Tempo de spawn:", monster.Spawn.ToString());
-            embed.WithFooter("Veja os comando abaixo para adicionar os atributos");
-            await ctx.RespondAsync(embed.Build());
-            
-                        
-            embed = new DiscordEmbedBuilder();
-            embed.WithTitle("Estes são os atributos do monstro");
-            embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+            embed.WithFooter("Todos os monstros novos começam com status zerados\n Veja os comando abaixo para adicionar os atributos");
             await ctx.RespondAsync(embed.Build());
 
             var upando = true;
@@ -254,6 +242,7 @@ namespace FirstBotDiscord.Repository
                         break;
                 }
             }
+            
             if (upando == false) 
                 await ctx.RespondAsync("Monstro completo 👾");
             

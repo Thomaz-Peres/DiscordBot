@@ -28,7 +28,7 @@ namespace FirstBotDiscord.Repository
                     NamePlayer = ctx.User.Username
                 };
 
-                player.MyCharacter.CurrentLocalization = new LocalizationEntity(ctx.Channel.Id, ctx.Channel.Name);
+                player.MyCharacter.CurrentLocalization = new LocalizationEntity(ctx.Channel.Id, ctx.Channel.Name, ctx.Channel.Guild.Id);
                 await _context.CollectionPlayers.InsertOneAsync(player);
 
                 embed.AddField("Nome do seu cadastro:", $"{player.NamePlayer}");
@@ -58,11 +58,12 @@ namespace FirstBotDiscord.Repository
 
             if (player.PlayerId == ctx.User.Id && player.PlayDice == false)
             {
-                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentOrMinValuePoints", atributtesNum);
+                var update = Builders<PlayerEntity>.Update.Set("MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints", atributtesNum);
                 var update2 = Builders<PlayerEntity>.Update.Set("PlayDice", true);
 
 
-                embed.AddField($"{ctx.User.Username} ganhou {atributtesNum} pontos de atributos iniciais:", $"{atributtesNum}");
+                embed.WithDescription($"{ctx.User.Username} ganhou {atributtesNum} pontos de atributos iniciais \n " +
+                    $"Use o comando aP(Atribuit Pontos) para utilizar os pontos livres");
                 await ctx.RespondAsync(embed.Build());
 
 

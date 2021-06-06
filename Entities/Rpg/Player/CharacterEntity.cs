@@ -13,16 +13,16 @@ namespace FirstBotDiscord.Entities.Rpg.Player
         public ClassEnum MyClass { get; set; }
 
         public LevelEntity Experience { get; set; } = new LevelEntity();
-        public StatusOfPointsEntity LifePoints { get; set; } = new StatusOfPointsEntity(30, 30);
-        public StatusOfPointsEntity ManaPoints { get; set; } = new StatusOfPointsEntity(50, 50);
+        public StatusOfPointsEntity LifePoints { get; set; } = new StatusOfPointsEntity(30, 0);
+        public StatusOfPointsEntity ManaPoints { get; set; } = new StatusOfPointsEntity(30, 0);
         public StatusOfPointsEntity KarmaPoints { get; set; } = new StatusOfPointsEntity();
-        public StatusOfPointsEntity PhysicalAttack { get; set; } = new StatusOfPointsEntity(5, 5);
-        public StatusOfPointsEntity MagicAttack { get; set; } = new StatusOfPointsEntity(5, 5);
-        public StatusOfPointsEntity Armor { get; set; } = new StatusOfPointsEntity(10, 10);
-        public StatusOfPointsEntity MagicResistence { get; set; } = new StatusOfPointsEntity(10, 10);
-        public StatusOfPointsEntity Persuation { get; set; } = new StatusOfPointsEntity(10, 10);
-        public StatusOfPointsEntity Luck { get; set; } = new StatusOfPointsEntity(10, 10);
-        public StatusOfPointsEntity Evasion { get; set; } = new StatusOfPointsEntity(10, 10);
+        public StatusOfPointsEntity PhysicalAttack { get; set; } = new StatusOfPointsEntity(5, 0);
+        public StatusOfPointsEntity MagicAttack { get; set; } = new StatusOfPointsEntity(5, 0);
+        public StatusOfPointsEntity Armor { get; set; } = new StatusOfPointsEntity(0, 0);
+        public StatusOfPointsEntity MagicResistence { get; set; } = new StatusOfPointsEntity(0, 0);
+        public StatusOfPointsEntity Persuation { get; set; } = new StatusOfPointsEntity(10, 0);
+        public StatusOfPointsEntity Luck { get; set; } = new StatusOfPointsEntity(10, 0);
+        public StatusOfPointsEntity Evasion { get; set; } = new StatusOfPointsEntity(10, 0);
 
         public LocalizationEntity CurrentLocalization { get; set; } = new LocalizationEntity();
 

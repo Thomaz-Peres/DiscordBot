@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Commands
 {
-    public class CharactersCommands : BaseCommandModule
+    public class AssignAtributtesCharacter : BaseCommandModule
     {
         private readonly CharactersRepository _repository;
 
-        public CharactersCommands(CharactersRepository repository) =>
+        public AssignAtributtesCharacter(CharactersRepository repository) =>
             _repository = repository;
 
         [Command("AtribuirPontos")]

@@ -17,20 +17,17 @@ namespace FirstBotDiscord.Repository
         public AtributesRepository(DataContext context) =>
             _context = context;
 
-        public async Task CharacterAtributes(CommandContext ctx, DiscordUser user)
+        public async Task PlayerStatus(CommandContext ctx, DiscordUser user)
         {
             var character = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
 
             var embed = new DiscordEmbedBuilder();
-
-            embed.WithTitle("Atributos do seu personagem");
+            embed.WithTitle($"{character.NamePlayer}");
             embed.WithThumbnail(user.AvatarUrl);
 
-            embed.AddField("Name:", character.NamePlayer);
-            embed.AddField("Vida:", character.MyCharacter.LifePoints.CurrentOrMinValuePoints.ToString(), true);
-            embed.AddField("Mana:", character.MyCharacter.ManaPoints.CurrentOrMinValuePoints.ToString(), true);
-            embed.AddField("Karma:", character.MyCharacter.KarmaPoints.CurrentOrMinValuePoints.ToString(), true);
-            embed.AddField("Experiencia:", character.MyCharacter.Experience.CurrentExperience.ToString());
+            embed.AddField("HP", $"{character.MyCharacter.LifePoints.CurrentOrMinValuePoints} / {character.MyCharacter.LifePoints.MaxValuePoints}", true);
+            embed.AddField("MP", $"{character.MyCharacter.ManaPoints.CurrentOrMinValuePoints} / {character.MyCharacter.ManaPoints.MaxValuePoints}", true);
+            embed.AddField("Karma", character.MyCharacter.KarmaPoints.CurrentOrMinValuePoints.ToString(), true);
 
             embed.AddField("Sua raça:", character.MyCharacter.Race.ToString());
             embed.AddField("Sua classe atual:", character.MyCharacter.MyClass.ToString());
@@ -41,9 +38,42 @@ namespace FirstBotDiscord.Repository
 
             embed.AddField("Localização atual:", character.MyCharacter.CurrentLocalization.ChannelName);
 
-            embed.AddField("Atributos livres:", character.MyCharacter.AtributesCharacter.PontosLivres.CurrentValuePoints.ToString());
+            embed.WithFooter("Se quiser verificar os status e atributos utilize o comando 'sa'");
+
+            await ctx.RespondAsync(embed.Build());
+        }
+
+        public async Task CharacterStatus(CommandContext ctx, DiscordUser user)
+        {
+            var status = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
+            
+            var embed = new DiscordEmbedBuilder();
+            
+            embed.WithTitle($"Status e atributos {status.NamePlayer}");
+            
+            var atb = status.MyCharacter.AtributesCharacter;
+
+            embed.WithDescription($@"{new StringBuilder().AppendLine("STATUS       MIN/MAX")}" +
+                                  $"Ataque fisico: {status.MyCharacter.PhysicalAttack.CurrentOrMinValuePoints} / {status.MyCharacter.PhysicalAttack.MaxValuePoints} \n" +
+                                  $"Ataque magico: {status.MyCharacter.MagicAttack.CurrentOrMinValuePoints} / {status.MyCharacter.MagicAttack.MaxValuePoints} \n" +
+                                  $"Armadura: {status.MyCharacter.Armor.CurrentOrMinValuePoints} / {status.MyCharacter.Armor.MaxValuePoints} \n" +
+                                  $"Resistencia magica: {status.MyCharacter.MagicResistence.CurrentOrMinValuePoints} / {status.MyCharacter.MagicResistence.MaxValuePoints} \n" +
+                                  $"Persuassão: {status.MyCharacter.Persuation.CurrentOrMinValuePoints} / {status.MyCharacter.MagicResistence.MaxValuePoints} \n" +
+                                  $"Sorte: {status.MyCharacter.Luck.CurrentOrMinValuePoints} / {status.MyCharacter.Luck.MaxValuePoints} \n" +
+                                  $"Evasão: {status.MyCharacter.Evasion.CurrentOrMinValuePoints} / {status.MyCharacter.Evasion.MaxValuePoints} \n\n" +
+
+                                  $"{new StringBuilder().AppendLine("ATRIBUTOS")}" +
+                                  $"Força: {atb.Forca.CurrentValuePoints} | " +
+                                  $"Inteligencia: {atb.Inteligencia.CurrentValuePoints}\n" +
+                                  $"Vitalidade: {atb.Vitalidade.CurrentValuePoints} | " +
+                                  $"Agilidade: {atb.Agilidade.CurrentValuePoints}\n" +
+                                  $"Carisma: {atb.Carisma.CurrentValuePoints} | " +
+                                  $"Sabedoria: {atb.Sabedoria.CurrentValuePoints}\n" +
+                                  $"Sorte: {atb.Sorte.CurrentValuePoints} | " +
+                                  $"Pontos Livres: {atb.PontosLivres.CurrentValuePoints}");
 
             embed.WithFooter("Se possui atributos livres, use o comando 'ap' para utiliza-los");
+
             await ctx.RespondAsync(embed.Build());
         }
     }

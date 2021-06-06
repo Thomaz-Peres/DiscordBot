@@ -17,9 +17,9 @@ namespace FirstBotDiscord.Repository
 
         public async Task AssignPointsCharacter(DiscordUser user, CommandContext ctx)
         {
-            var interactivity = ctx.Client.GetInteractivity();
-
             var player = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
+
+            var interactivity = ctx.Client.GetInteractivity();
 
             var embed = new DiscordEmbedBuilder();
 
@@ -42,21 +42,14 @@ namespace FirstBotDiscord.Repository
                 switch(YesOrNot.Result.Content.ToString().Trim())
                 {
                     case "sim":
-                        var statusRepository = new StatusRepository(_context);
+                        var statusRepository = new StatusRepository();
+
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Quantos pontos de atributo você deseja atribuir ? Min. 1");
                         await ctx.RespondAsync(embed.Build());
                         var quantityUp = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id && player.PlayerId == ctx.User.Id);
 
                         if (quantityUp.TimedOut) await ctx.RespondAsync("Advinha ? O tempo acabou denovo");
-
-                        embed = new DiscordEmbedBuilder();
-                        embed.WithTitle("Estes são seus atributos atuais");
-                        embed.WithDescription($"Vitalidade = {player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints} -- Sorte = {player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints}\n" +
-                            $"Agilidade = {player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints} -- Carisma = {player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints}\n" +
-                            $"Força = {player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints} -- Inteligencia = {player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints}\n" +
-                            $"Sabedoria = {player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints}");
-                        await ctx.RespondAsync(embed.Build());
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithTitle("Qual dos atributos abaixo você deseja upar ?");

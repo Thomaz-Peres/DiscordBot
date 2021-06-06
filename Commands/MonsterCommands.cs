@@ -19,11 +19,11 @@ namespace FirstBotDiscord.Commands
         [Command("CreateMonster")]
         [Aliases("cm")]
         [Description("Permite criar um monstro")]
-        public async Task CreateMonster(CommandContext ctx, string monsterName, int level, int monsterLife, int monsterMana)
+        public async Task CreateMonster(CommandContext ctx, string monsterName, int level)
         {
             await ctx.TriggerTypingAsync();
 
-            await _monsterRepository.CreateMonster(ctx, monsterName, level, monsterLife, monsterMana);
+            await _monsterRepository.CreateMonster(ctx, monsterName, level);
         }
 
     }
