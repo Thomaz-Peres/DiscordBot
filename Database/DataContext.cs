@@ -4,15 +4,7 @@ using FirstBotDiscord.Entities.Rpg;
 using FirstBotDiscord.Entities.Rpg.Items;
 using FirstBotDiscord.Entities.Rpg.Player;
 using FirstBotDiscord.Entities.Rpg.RpgMonsters;
-using FirstBotDiscord.Extensions;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Database
 {

@@ -6,9 +6,9 @@ using MongoDB.Driver;
 
 namespace FirstBotDiscord.Repository
 {
-    public class StatusRepository
+    public class PlayerStatusRepository
     {
-        public StatusRepository() { }
+        public PlayerStatusRepository() { }
 
         public PlayerEntity AddLifeStatus(PlayerEntity player)
         {

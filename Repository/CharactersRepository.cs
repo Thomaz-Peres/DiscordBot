@@ -42,7 +42,7 @@ namespace FirstBotDiscord.Repository
                 switch(YesOrNot.Result.Content.ToString().Trim())
                 {
                     case "sim":
-                        var statusRepository = new StatusRepository();
+                        var statusRepository = new PlayerStatusRepository();
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Quantos pontos de atributo você deseja atribuir ? Min. 1");

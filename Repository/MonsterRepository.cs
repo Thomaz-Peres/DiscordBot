@@ -32,8 +32,8 @@ namespace FirstBotDiscord.Repository
             embed.AddField("Nome:", monster.MonsterName, true);
             embed.AddField("Level:", monster.Level.ToString(), true);
 
-            embed.AddField("Vida do monstro:", monster.MonsterLifePoints.ToString(), true);
-            embed.AddField("Mana do monstro:", monster.MonsterManaPoints.ToString(), true);
+            embed.AddField("Vida do monstro:", monster.MonsterLifePoints.CurrentOrMinValuePoints.ToString(), true);
+            embed.AddField("Mana do monstro:", monster.MonsterManaPoints.CurrentOrMinValuePoints.ToString(), true);
 
             //embed.AddField("Tempo de spawn:", monster.Spawn.ToString());
             embed.WithFooter("Todos os monstros novos começam com status zerados\n Veja os comando abaixo para adicionar os atributos");
@@ -43,12 +43,15 @@ namespace FirstBotDiscord.Repository
 
             while(upando == true)
             {
+                var statusRepository = new MonsterStatusRepository();
+
                 embed = new DiscordEmbedBuilder();
                 embed.WithDescription("Quantos pontos de atributo você deseja atribuir ? Min. 1");
                 await ctx.RespondAsync(embed.Build());
                 var quantityUp = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
 
-                if (quantityUp.TimedOut) await ctx.RespondAsync("Cabou o tempo");
+                if (quantityUp.TimedOut) 
+                    await ctx.RespondAsync("Cabou o tempo");
 
                 embed = new DiscordEmbedBuilder();
                 embed.WithTitle("Qual dos atributos abaixo você deseja upar ?");
@@ -57,6 +60,7 @@ namespace FirstBotDiscord.Repository
                     $"Agilidade -- Carisma\n" +
                     $"Forca -- Inteligencia\n" +
                     $"Sabedoria");
+
                 await ctx.RespondAsync(embed.Build());
 
                 var waitAtributeToAsign = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
@@ -75,6 +79,8 @@ namespace FirstBotDiscord.Repository
                         $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
+
+                        statusRepository.AddLifeStatus(monster);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
@@ -98,6 +104,8 @@ namespace FirstBotDiscord.Repository
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
+                        statusRepository.AddLuckStatus(monster);
+
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                         await ctx.RespondAsync(embed.Build());
@@ -119,6 +127,8 @@ namespace FirstBotDiscord.Repository
                         $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
+
+                        statusRepository.AddEvasionStatus(monster);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
@@ -142,6 +152,8 @@ namespace FirstBotDiscord.Repository
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
+                        statusRepository.AddPersuationStatus(monster);
+
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                         await ctx.RespondAsync(embed.Build());
@@ -163,6 +175,8 @@ namespace FirstBotDiscord.Repository
                         $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
+
+                        statusRepository.AddPhysicalAttackStatus(monster);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
@@ -186,6 +200,8 @@ namespace FirstBotDiscord.Repository
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
 
+                        statusRepository.AddMagicAttackStatus(monster);
+
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                         await ctx.RespondAsync(embed.Build());
@@ -207,6 +223,8 @@ namespace FirstBotDiscord.Repository
                         $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
                         $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
                         await ctx.RespondAsync(embed.Build());
+
+                        statusRepository.AddManaStatus(monster);
 
                         embed = new DiscordEmbedBuilder();
                         embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");

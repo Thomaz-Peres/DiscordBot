@@ -19,12 +19,11 @@ namespace FirstBotDiscord.Repository
 
         public async Task CreateItem(CommandContext ctx, string itemName, decimal price, bool canSell, bool canStack, bool canTrade, int itemType)
         {
-            var interactivity = ctx.Client.GetInteractivity();
-
             var embed = new DiscordEmbedBuilder();
             embed.WithDescription("Qual a descrição do item ?");
             await ctx.RespondAsync(embed.Build());
-            
+
+            var interactivity = ctx.Client.GetInteractivity();
             var itemDescription = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
             if (itemDescription.TimedOut)
             {

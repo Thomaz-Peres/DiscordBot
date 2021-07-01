@@ -1,8 +1,10 @@
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
+using DSharpPlus.Interactivity.EventHandling;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Lavalink;
 using DSharpPlus.Net;
@@ -10,8 +12,6 @@ using FirstBotDiscord.Commands;
 using FirstBotDiscord.Configurations;
 using FirstBotDiscord.Database;
 using FirstBotDiscord.Repository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -39,15 +39,13 @@ namespace FirstBotDiscord.Bot
                 MinimumLogLevel = LogLevel.Debug
             });
 
-
-            discord.UseInteractivity(new InteractivityConfiguration
+            discord.UseInteractivity(new InteractivityConfiguration()
             {
                 Timeout = System.TimeSpan.FromSeconds(30),
                 PollBehaviour = PollBehaviour.KeepEmojis,
                 PaginationBehaviour = PaginationBehaviour.Ignore,
-                PaginationDeletion = PaginationDeletion.KeepEmojis,
+                PaginationDeletion = PaginationDeletion.KeepEmojis
             });
-
 
             this.Database = new DataContext();
             this.StartsRepository = new StartsRepository(this.Database);
