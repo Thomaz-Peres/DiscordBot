@@ -33,8 +33,9 @@ namespace FirstBotDiscord.Repository
                 embed.AddField("MP", $"{character.MyCharacter.ManaPoints.CurrentOrMinValuePoints} / {character.MyCharacter.ManaPoints.MaxValuePoints}", true);
                 embed.AddField("Karma", character.MyCharacter.KarmaPoints.CurrentOrMinValuePoints.ToString(), true);
 
-                embed.AddField("Sua raça:", character.MyCharacter.Race.ToString());
-                embed.AddField("Sua classe atual:", character.MyCharacter.MyClass.ToString());
+                //embed.AddField("Sua raça:", character.MyCharacter.Race);
+                //embed.AddField("Sua classe atual:", character.MyCharacter.Class);
+                //embed.AddField("SEu titulo atual:", character.MyCharacter.Title);
 
                 embed.AddField("Monstros mortos:", character.MyCharacter.MonsterKill.ToString(), true);
                 embed.AddField("Mortes:", character.MyCharacter.Deaths.ToString(), true);

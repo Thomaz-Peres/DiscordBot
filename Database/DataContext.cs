@@ -22,7 +22,7 @@ namespace FirstBotDiscord.Database
         {
             MongoClient = new MongoClient("mongodb://localhost:27017");
             MongoDatabase = MongoClient.GetDatabase("rpgdiscord");
-
+            
             MapsBuilders.BuidAll();
 
             CollectionPlayers = MongoDatabase.GetCollection<PlayerEntity>("Players");
@@ -30,7 +30,7 @@ namespace FirstBotDiscord.Database
             CollectionMonsters = MongoDatabase.GetCollection<BaseMonstersEntity>("Monster");
             CollectionMaps = MongoDatabase.GetCollection<MapsEntity>("Maps");
 
-            MongoClient.StartSession();
+            MongoClient.StartSessionAsync();
         }
     }
 }

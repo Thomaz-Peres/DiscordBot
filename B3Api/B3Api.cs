@@ -9,7 +9,7 @@ namespace FirstBotDiscord.B3Api
         {
             HubConnection connection;
 
-            connection = new HubConnectionBuilder().WithUrl(new System.Uri("http://b3api.webmat.com.br/HubConnection?Token=" + Configurations.Parameters.CredentialCode)).WithAutomaticReconnect().Build();
+            connection = new HubConnectionBuilder().WithUrl(new System.Uri("https://b3api.webmat.com.br/HubConnection?Token=" + Configurations.Parameters.CredentialCode)).WithAutomaticReconnect().Build();
             connection.On<string>("LogOut", (msg) => LogOut(msg));
 
             connection.On<string>("UpdateList", (ticker) => UpdateList(ticker));

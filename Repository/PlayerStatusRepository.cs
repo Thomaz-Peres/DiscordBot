@@ -10,82 +10,73 @@ namespace FirstBotDiscord.Repository
     {
         public PlayerStatusRepository() { }
 
-        public PlayerEntity AddLifeStatus(PlayerEntity player)
+        public void AddLifeStatus(PlayerEntity player)
         {
-            if(player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints > 0)
+            if (player.MyCharacter.LifePoints.CurrentOrMinValuePoints == player.MyCharacter.LifePoints.MaxValuePoints)
             {
                 player.MyCharacter.LifePoints.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints * 3.00) + 30.00;
-
-                if (player.MyCharacter.LifePoints.CurrentOrMinValuePoints == player.MyCharacter.LifePoints.MaxValuePoints)
-                    player.MyCharacter.LifePoints.CurrentOrMinValuePoints = player.MyCharacter.LifePoints.MaxValuePoints;
-
-                else if (player.MyCharacter.LifePoints.CurrentOrMinValuePoints < player.MyCharacter.LifePoints.MaxValuePoints && player.MyCharacter.LifePoints.CurrentOrMinValuePoints > 0.00)
-                    player.MyCharacter.LifePoints.CurrentOrMinValuePoints += 1.00;
+                player.MyCharacter.LifePoints.CurrentOrMinValuePoints = player.MyCharacter.LifePoints.MaxValuePoints;
+                return;
             }
-            return player;
+
+            if ((player.MyCharacter.LifePoints.CurrentOrMinValuePoints < player.MyCharacter.LifePoints.MaxValuePoints && player.MyCharacter.LifePoints.CurrentOrMinValuePoints > 0.00) || (player.MyCharacter.LifePoints.CurrentOrMinValuePoints < 0.00))
+            {
+                player.MyCharacter.LifePoints.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Vitalidade.CurrentValuePoints * 3.00) + 30.00;
+                player.MyCharacter.LifePoints.CurrentOrMinValuePoints += 1.00;
+                return;
+            }
         }
 
-        public PlayerEntity AddManaStatus(PlayerEntity player)
+        public void AddManaStatus(PlayerEntity player)
         {
-            if(player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints > 0)
+            player.MyCharacter.MagicAttack.MaxValuePoints += 1.50;
+
+
+            if (player.MyCharacter.ManaPoints.CurrentOrMinValuePoints == player.MyCharacter.ManaPoints.MaxValuePoints)
             {
                 player.MyCharacter.ManaPoints.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints * 3.00) + 30.00;
-                player.MyCharacter.MagicAttack.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints * 1.00) + 1.50;
-
-
-                if(player.MyCharacter.ManaPoints.CurrentOrMinValuePoints == player.MyCharacter.ManaPoints.MaxValuePoints)
-                    player.MyCharacter.ManaPoints.CurrentOrMinValuePoints = player.MyCharacter.ManaPoints.MaxValuePoints;
-
-                else if (player.MyCharacter.ManaPoints.CurrentOrMinValuePoints < player.MyCharacter.ManaPoints.MaxValuePoints && player.MyCharacter.ManaPoints.CurrentOrMinValuePoints > 0.00)
-                    player.MyCharacter.ManaPoints.CurrentOrMinValuePoints += 1.00;
+                player.MyCharacter.ManaPoints.CurrentOrMinValuePoints = player.MyCharacter.ManaPoints.MaxValuePoints;
+                return;
             }
-            return player;
+
+            if (player.MyCharacter.ManaPoints.CurrentOrMinValuePoints < player.MyCharacter.ManaPoints.MaxValuePoints && player.MyCharacter.ManaPoints.CurrentOrMinValuePoints > 0.00)
+            {
+                player.MyCharacter.ManaPoints.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints * 3.00) + 30.00;
+                player.MyCharacter.ManaPoints.CurrentOrMinValuePoints += 1.00;
+                return;
+            }
         }
 
-        public PlayerEntity AddMagicAttackStatus(PlayerEntity player)
+        //   This stats do not increase the minimum
+        public void AddMagicAttackStatus(PlayerEntity player)
         {
-            if (player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints > 0)
-            {
-                player.MyCharacter.MagicAttack.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints * 3.00) + 5.00;
-                player.MyCharacter.ManaPoints.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints * 1.00) + 8.00;
-            }
-            return player;
+            player.MyCharacter.MagicAttack.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Inteligencia.CurrentValuePoints * 3.00) + 5.00;
+            player.MyCharacter.ManaPoints.MaxValuePoints += + 8.00;
         }
 
-        public PlayerEntity AddPhysicalAttackStatus(PlayerEntity player)
+        //   This stats do not increase the minimum
+        public void AddPhysicalAttackStatus(PlayerEntity player)
         {
-            if (player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints > 0)
-            {
-                player.MyCharacter.PhysicalAttack.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints * 3.00) + 5.00;
-            }
-            return player;
+            player.MyCharacter.PhysicalAttack.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Forca.CurrentValuePoints * 3.00) + 5.00;
         }
 
-        public PlayerEntity AddLuckStatus(PlayerEntity player)
+        //   This stats do not increase the minimum
+        public void AddLuckStatus(PlayerEntity player)
         {
-            if(player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints > 0)
-            {
-                player.MyCharacter.Luck.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints * 3.00) + 10.00;
-            }
-            return player;
+            player.MyCharacter.Luck.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Sorte.CurrentValuePoints * 3.00) + 10.00;
         }
 
-        public PlayerEntity AddEvasionStatus(PlayerEntity player)
+        //   This stats do not increase the minimum
+        public void AddEvasionStatus(PlayerEntity player)
         {
-            if(player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints > 0)
-            {
-                player.MyCharacter.Evasion.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints * 3.00) + 10.00;
-            }
-            return player;
+            player.MyCharacter.Evasion.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Agilidade.CurrentValuePoints * 3.00) + 10.00;
         }
 
-        public PlayerEntity AddPersuationStatus(PlayerEntity player)
+        //   This stats do not increase the minimum
+        public void AddPersuationStatus(PlayerEntity player)
         {
-            if(player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints > 0)
-            {
-                player.MyCharacter.Persuation.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints * 3.00) + 10.00;
-            }
-            return player;
+            player.MyCharacter.Persuation.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Carisma.CurrentValuePoints * 3.00) + 10.00;
+                     
         }
     }
 }

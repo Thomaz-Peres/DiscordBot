@@ -7,7 +7,7 @@
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
     <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\thoma\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.10.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.0.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\thoma\.nuget\packages\" />
@@ -19,25 +19,25 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Content Include="$(NuGetPackageRoot)mongodb.driver.core\2.12.2\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy32.dll" Condition="Exists('$(NuGetPackageRoot)mongodb.driver.core\2.12.2\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy32.dll')">
+    <Content Include="$(NuGetPackageRoot)mongodb.driver.core\2.13.0\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy32.dll" Condition="Exists('$(NuGetPackageRoot)mongodb.driver.core\2.13.0\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy32.dll')">
       <NuGetPackageId>MongoDB.Driver.Core</NuGetPackageId>
-      <NuGetPackageVersion>2.12.2</NuGetPackageVersion>
+      <NuGetPackageVersion>2.13.0</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>Core\Compression\Snappy\lib\win\snappy32.dll</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)mongodb.driver.core\2.12.2\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy64.dll" Condition="Exists('$(NuGetPackageRoot)mongodb.driver.core\2.12.2\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy64.dll')">
+    <Content Include="$(NuGetPackageRoot)mongodb.driver.core\2.13.0\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy64.dll" Condition="Exists('$(NuGetPackageRoot)mongodb.driver.core\2.13.0\contentFiles\any\netstandard2.1\Core\Compression\Snappy\lib\win\snappy64.dll')">
       <NuGetPackageId>MongoDB.Driver.Core</NuGetPackageId>
-      <NuGetPackageVersion>2.12.2</NuGetPackageVersion>
+      <NuGetPackageVersion>2.13.0</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>Core\Compression\Snappy\lib\win\snappy64.dll</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)mongodb.driver.core\2.12.2\contentFiles\any\netstandard2.1\Core\Compression\Zstandard\lib\win\libzstd.dll" Condition="Exists('$(NuGetPackageRoot)mongodb.driver.core\2.12.2\contentFiles\any\netstandard2.1\Core\Compression\Zstandard\lib\win\libzstd.dll')">
+    <Content Include="$(NuGetPackageRoot)mongodb.driver.core\2.13.0\contentFiles\any\netstandard2.1\Core\Compression\Zstandard\lib\win\libzstd.dll" Condition="Exists('$(NuGetPackageRoot)mongodb.driver.core\2.13.0\contentFiles\any\netstandard2.1\Core\Compression\Zstandard\lib\win\libzstd.dll')">
       <NuGetPackageId>MongoDB.Driver.Core</NuGetPackageId>
-      <NuGetPackageVersion>2.12.2</NuGetPackageVersion>
+      <NuGetPackageVersion>2.13.0</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
@@ -45,9 +45,9 @@
     </Content>
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design\5.0.5\build\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design\5.0.5\build\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design\6.0.0-preview.6.21352.1\build\net6.0\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design\6.0.0-preview.6.21352.1\build\net6.0\Microsoft.EntityFrameworkCore.Design.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\thoma\.nuget\packages\microsoft.entityframeworkcore.tools\5.0.5</PkgMicrosoft_EntityFrameworkCore_Tools>
+    <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\thoma\.nuget\packages\microsoft.entityframeworkcore.tools\6.0.0-preview.6.21352.1</PkgMicrosoft_EntityFrameworkCore_Tools>
   </PropertyGroup>
 </Project>

@@ -39,11 +39,15 @@ namespace FirstBotDiscord.Repository
                 embed.WithFooter($"Conta criada com sucesso. \nUse o comando 'pd(play Dice)' para descobrir quantos pontos de habilidade você ganhara");
 
                 await ctx.RespondAsync(embed.Build());
-            } else
+                return;
+            } 
+
+            if(player != null)
             {
                 embed = new DiscordEmbedBuilder();
                 embed.WithDescription("Você ja possui uma conta, seu noia");
                 await ctx.RespondAsync(embed.Build());
+                return;
             }
         }
 
@@ -52,7 +56,10 @@ namespace FirstBotDiscord.Repository
             var embed = new DiscordEmbedBuilder();
             var player = await _context.CollectionPlayers.Find(x => x.PlayerId == user.Id).FirstOrDefaultAsync();
 
-            Random random = new Random();
+            if (player == null)
+                await ctx.RespondAsync("Você não possui um personagem");
+
+            var random = new Random();
 
             int atributtesNum = random.Next(1, 20);
 
@@ -63,7 +70,7 @@ namespace FirstBotDiscord.Repository
 
 
                 embed.WithDescription($"{ctx.User.Username} ganhou {atributtesNum} pontos de atributos iniciais \n " +
-                    $"Use o comando aP(Atribuit Pontos) para utilizar os pontos livres");
+                    $"Use o comando aP(Atribuir Pontos) para utilizar os pontos livres");
                 await ctx.RespondAsync(embed.Build());
 
 
@@ -76,7 +83,8 @@ namespace FirstBotDiscord.Repository
             }
             else
             {
-                await ctx.RespondAsync($"{ctx.User.Mention} Você ja ganhou seus pontos de atributo, seu arrombado");
+                await ctx.RespondAsync($"{ctx.User.Mention} Você ja ganhou seus pontos de atributo!");
+                return;
             }
         }
     }

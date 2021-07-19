@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Bot
 {
-    public class Bot
+    public class Program
     {
         public DataContext Database { get; private set; }
         public StartsRepository StartsRepository { get; private set; }
@@ -28,7 +28,7 @@ namespace FirstBotDiscord.Bot
         public MonsterRepository MonsterRepository { get; private set; }
 
         public static void Main(string[] args) =>
-            new Bot().RodandoBot(args).GetAwaiter().GetResult();
+            new Program().RodandoBot(args).GetAwaiter().GetResult();
 
         public async Task RodandoBot(string[] args)
         {
