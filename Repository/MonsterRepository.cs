@@ -16,7 +16,7 @@ namespace FirstBotDiscord.Repository
         public MonsterRepository(DataContext context) =>
             _context = context;
 
-        public async Task CreateMonster(CommandContext ctx, string monsterName, int level)
+        public async Task CreateMonster(CommandContext ctx, string monsterName, int level, bool isBoss)
         {
             var monster = new BaseMonstersEntity();
 
@@ -26,17 +26,25 @@ namespace FirstBotDiscord.Repository
 
             monster.MonsterName = monsterName;
             monster.Level = level;
+            monster.IsBoss = isBoss;
             //monster.Spawn = spawnTime;
 
             embed.WithTitle("Novo monstro:");
             embed.AddField("Nome:", monster.MonsterName, true);
             embed.AddField("Level:", monster.Level.ToString(), true);
+            embed.AddField("É um Boss:", monster.IsBoss.ToString(), true);
+
+            monster.MonsterLifePoints.MaxValuePoints *= monster.Level;
+            monster.MonsterLifePoints.CurrentOrMinValuePoints = monster.MonsterLifePoints.MaxValuePoints;
+
+            monster.MonsterManaPoints.MaxValuePoints *= monster.Level;
+            monster.MonsterManaPoints.CurrentOrMinValuePoints = monster.MonsterManaPoints.MaxValuePoints;
 
             embed.AddField("Vida do monstro:", monster.MonsterLifePoints.CurrentOrMinValuePoints.ToString(), true);
             embed.AddField("Mana do monstro:", monster.MonsterManaPoints.CurrentOrMinValuePoints.ToString(), true);
 
             //embed.AddField("Tempo de spawn:", monster.Spawn.ToString());
-            embed.WithFooter("Todos os monstros novos começam com status zerados\n Veja os comando abaixo para adicionar os atributos");
+            embed.WithFooter("Todos os monstros novos começam com status zerados\nVeja os comando abaixo para adicionar os atributos");
             await ctx.RespondAsync(embed.Build());
 
             var upando = true;
@@ -50,8 +58,10 @@ namespace FirstBotDiscord.Repository
                 await ctx.RespondAsync(embed.Build());
                 var quantityUp = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
 
-                if (quantityUp.TimedOut) 
-                    await ctx.RespondAsync("Cabou o tempo");
+                if (quantityUp.TimedOut)
+                { 
+                    await ctx.RespondAsync("Cabou o tempo, começa de novo");
+                }
 
                 embed = new DiscordEmbedBuilder();
                 embed.WithTitle("Qual dos atributos abaixo você deseja upar ?");
@@ -65,7 +75,10 @@ namespace FirstBotDiscord.Repository
 
                 var waitAtributeToAsign = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
 
-                if (waitAtributeToAsign.TimedOut) await ctx.RespondAsync("Cabou o tempo de novo irmão, para de ser burro");
+                if (waitAtributeToAsign.TimedOut)
+                {
+                    await ctx.RespondAsync("Cabou o tempo de novo irmão, para de ser burro");
+                }
 
                 switch(waitAtributeToAsign.Result.Content.ToLower())
                 {

@@ -13,6 +13,7 @@ namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
         public int MonsterId { get; set; }
         public string MonsterName { get; set; }
         public int Level { get; set; }
+        public bool IsBoss { get; set; }
 
         public AtributesEntity MonsterAtributes { get; set; } = new AtributesEntity();
 
