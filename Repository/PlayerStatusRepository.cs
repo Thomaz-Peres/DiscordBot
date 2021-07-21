@@ -41,7 +41,7 @@ namespace FirstBotDiscord.Repository
 
             if (player.MyCharacter.ManaPoints.CurrentOrMinValuePoints < player.MyCharacter.ManaPoints.MaxValuePoints && player.MyCharacter.ManaPoints.CurrentOrMinValuePoints > 0.00)
             {
-                player.MyCharacter.ManaPoints.MaxValuePoints = (player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints * 3.00) + 30.00;
+                player.MyCharacter.ManaPoints.MaxValuePoints += (player.MyCharacter.AtributesCharacter.Sabedoria.CurrentValuePoints * 3.00) + 30.00;
                 player.MyCharacter.ManaPoints.CurrentOrMinValuePoints += 1.00;
                 return;
             }

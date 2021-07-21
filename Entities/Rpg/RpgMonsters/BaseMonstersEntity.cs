@@ -1,16 +1,14 @@
 ﻿using FirstBotDiscord.Entities.Rpg.UsefulnessOfPoints;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
 {
     public class BaseMonstersEntity
     {
-        public int MonsterId { get; set; }
+        [BsonId]
+        public Guid Id { get; set; }
+        public int? MonsterId { get; set; }
         public string MonsterName { get; set; }
         public int Level { get; set; }
         public bool IsBoss { get; set; }
