@@ -1,10 +1,14 @@
 ﻿using FirstBotDiscord.Enums;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace FirstBotDiscord.Entities.Rpg.Items
 {
     public class BaseItemsEntity
     {
-        public int ItemId { get; set; }
+        [BsonId]
+        public Guid Id { get; set; }
+        public int? ItemId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; } = 1;
         public bool CanSell { get; set; } = true;

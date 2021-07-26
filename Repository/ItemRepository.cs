@@ -19,34 +19,50 @@ namespace FirstBotDiscord.Repository
 
         public async Task CreateItem(CommandContext ctx, string itemName, decimal price, bool canSell, bool canStack, bool canTrade, int itemType)
         {
-            var embed = new DiscordEmbedBuilder();
-            embed.WithDescription("Qual a descrição do item ?");
-            await ctx.RespondAsync(embed.Build());
-
-            var interactivity = ctx.Client.GetInteractivity();
-            var itemDescription = await interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
-            if (itemDescription.TimedOut)
+            await Task.Run(() =>
             {
-                embed.WithDescription("Tempo de resposta expirou, começa denovo ai, seu burro KKKKKKKK");
-                await ctx.RespondAsync(embed.Build());
-            }
+                var item = new BaseItemsEntity(itemName, price, canSell, canStack, canTrade, itemType);
 
-            var result = new BaseItemsEntity(itemName, price, canSell, canStack, canTrade, itemType) 
-            { Description = itemDescription.Result.Content, ItemId = 1 };
+                var sort = Builders<BaseItemsEntity>.Sort.Descending(x => x.ItemId);
+                var filterItems = Builders<BaseItemsEntity>.Filter.Empty;
 
-            await _context.CollectionItems.InsertOneAsync(result);
+                var lastId = _context.CollectionItems.Find(filterItems).Sort(sort).FirstOrDefault();
 
-            embed = new DiscordEmbedBuilder();
-            embed.WithTitle("Seu novo item:");
-            embed.AddField("Nome do item:", $"{result.Name}");
-            embed.AddField("Preço de compra do item", $"{result.Price}");
-            embed.AddField("É possivel vender o item ?", $"{result.CanSell}");
-            embed.AddField("É possivel fazer pilhas desse item ?", $"{result.CanStack}");
-            embed.AddField("É possivel trocar com algum player ?", $"{result.CanTrade}");
-            embed.AddField("Qual o tipo do item ?", $"{result.ItemType.GetEnumDescription()}");
-            embed.WithDescription(result.Description);
-            
-            await ctx.RespondAsync(embed.Build());
+                var embed = new DiscordEmbedBuilder();
+
+                if (lastId == null)
+                    item.ItemId = 1;
+                else
+                    item.ItemId = lastId.ItemId + 1;
+
+                embed.WithDescription("Qual a descrição do item ?");
+                ctx.RespondAsync(embed.Build());
+
+                var interactivity = ctx.Client.GetInteractivity();
+                var itemDescription = interactivity.WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                if (itemDescription.Result.TimedOut)
+                {
+                    embed.WithDescription("Tempo de resposta expirou, começa denovo ai, seu burro KKKKKKKK");
+                    ctx.RespondAsync(embed.Build());
+                }
+
+                item.Description = itemDescription.Result.Result.Content;
+
+                _context.CollectionItems.InsertOne(item);
+
+                embed = new DiscordEmbedBuilder();
+                embed.WithTitle("Seu novo item:");
+                embed.AddField("Nome do item:", $"{item.Name}");
+                embed.AddField("Preço de compra do item", $"{item.Price}");
+                embed.AddField("É possivel vender o item ?", $"{item.CanSell}");
+                embed.AddField("É possivel fazer pilhas desse item ?", $"{item.CanStack}");
+                embed.AddField("É possivel trocar com algum player ?", $"{item.CanTrade}");
+                embed.AddField("Qual o tipo do item ?", $"{item.ItemType.GetEnumDescription()}");
+                embed.WithDescription(item.Description);
+
+                ctx.RespondAsync(embed.Build());
+            });
         }
 
         #region Create Item por partes, o bot manda um comando "qual o nome do item" e voce responde, e assim por diante

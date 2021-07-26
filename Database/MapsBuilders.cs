@@ -87,7 +87,7 @@ namespace FirstBotDiscord.Database
             {
                 x.AutoMap();
                 x.SetIgnoreExtraElements(true);
-                x.MapIdMember(x => x.ItemId).SetIdGenerator(ObjectIdGenerator.Instance);
+                //x.MapIdMember(x => x.ItemId).SetIdGenerator(ObjectIdGenerator.Instance);
             });
         }
     }
