@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstBotDiscord.Entities.Rpg
+namespace FirstBotDiscord.Entities.Rpg.Classes
 {
-    public enum RaceEnum
+    public class Warrior : BaseClasses
     {
-        Human,
-        Elf,
-        Dwarf,
-        Bestial
     }
 }

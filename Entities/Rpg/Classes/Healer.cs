@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstBotDiscord.Entities.Rpg.Class
+namespace FirstBotDiscord.Entities.Rpg.Classes
 {
-    public class Mage // : ClassEntity
+    public class Healer : BaseClasses
     {
     }
 }

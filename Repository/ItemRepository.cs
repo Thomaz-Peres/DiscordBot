@@ -53,13 +53,13 @@ namespace FirstBotDiscord.Repository
 
                 embed = new DiscordEmbedBuilder();
                 embed.WithTitle("Seu novo item:");
+                embed.WithDescription($"Descrição do item: {item.Description}");
                 embed.AddField("Nome do item:", $"{item.Name}");
                 embed.AddField("Preço de compra do item", $"{item.Price}");
                 embed.AddField("É possivel vender o item ?", $"{item.CanSell}");
                 embed.AddField("É possivel fazer pilhas desse item ?", $"{item.CanStack}");
                 embed.AddField("É possivel trocar com algum player ?", $"{item.CanTrade}");
-                embed.AddField("Qual o tipo do item ?", $"{item.ItemType.GetEnumDescription()}");
-                embed.WithDescription(item.Description);
+                embed.AddField("Qual o tipo do item ?", $"{item.ItemType.GetEnumDescription()}");                
 
                 ctx.RespondAsync(embed.Build());
             });

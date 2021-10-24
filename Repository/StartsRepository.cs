@@ -3,9 +3,6 @@ using DSharpPlus.Entities;
 using FirstBotDiscord.Database;
 using FirstBotDiscord.Entities.Rpg;
 using FirstBotDiscord.Entities.Rpg.Player;
-using MongoDB.Driver;
-using System;
-using System.Threading.Tasks;
 
 namespace FirstBotDiscord.Repository
 {
