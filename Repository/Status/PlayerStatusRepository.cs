@@ -4,7 +4,7 @@ using FirstBotDiscord.Database;
 using FirstBotDiscord.Entities.Rpg.Player;
 using MongoDB.Driver;
 
-namespace FirstBotDiscord.Repository
+namespace FirstBotDiscord.Repository.Status
 {
     public class PlayerStatusRepository
     {

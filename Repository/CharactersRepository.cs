@@ -3,6 +3,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using FirstBotDiscord.Database;
 using FirstBotDiscord.Entities.Rpg.Player;
+using FirstBotDiscord.Repository.Status;
 using MongoDB.Driver;
 using System.Threading.Tasks;
 

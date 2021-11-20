@@ -13,6 +13,8 @@ namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
         public int Level { get; set; }
         public bool IsBoss { get; set; }
 
+        public LocalizationEntity monsterLocalization { get; set; } = new LocalizationEntity();
+
         public AtributesEntity MonsterAtributes { get; set; } = new AtributesEntity();
 
         public StatusOfPointsEntity MonsterLifePoints { get; set; } = new StatusOfPointsEntity(30, 30);
