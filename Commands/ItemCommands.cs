@@ -26,7 +26,7 @@ namespace FirstBotDiscord.Commands
 
         [Command("createNewItem")]
         [Aliases("ci")]
-        [Description("Cria um novo item")] 
+        [Description("Permite criar um novo item")] 
         public async Task CreateNewItem(CommandContext ctx, string itemName, decimal price, bool canSell, bool canStack, bool canTrade, int itemType)
         {
             #region teste

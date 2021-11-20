@@ -1,5 +1,4 @@
-﻿using FirstBotDiscord.Entities.Rpg.Class;
-using FirstBotDiscord.Entities.Rpg.UsefulnessOfPoints;
+﻿using FirstBotDiscord.Entities.Rpg.UsefulnessOfPoints;
 
 namespace FirstBotDiscord.Entities.Rpg.Player
 {
@@ -9,8 +8,8 @@ namespace FirstBotDiscord.Entities.Rpg.Player
         public MoneyEntity Money { get; set; } = new MoneyEntity();
         public AtributesEntity AtributesCharacter { get; set; } = new AtributesEntity();
         public string MyTitle { get; set; }
-        public RaceEnum Race { get; set; }
-        public ClassEnum MyClass { get; set; }
+        public string Race { get; set; }
+        public string MyClass { get; set; }
 
         public LevelEntity Experience { get; set; } = new LevelEntity();
         public StatusOfPointsEntity LifePoints { get; set; } = new StatusOfPointsEntity(30, 30);

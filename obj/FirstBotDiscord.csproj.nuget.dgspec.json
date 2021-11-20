@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj": {}
+    "C:\\Users\\thoma\\dev\\DiscordBotC-\\FirstBotDiscord.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj": {
+    "C:\\Users\\thoma\\dev\\DiscordBotC-\\FirstBotDiscord.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj",
+        "projectUniqueName": "C:\\Users\\thoma\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
         "projectName": "FirstBotDiscord",
-        "projectPath": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\FirstBotDiscord.csproj",
+        "projectPath": "C:\\Users\\thoma\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
         "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\Dev\\DiscordBotC-\\obj\\",
+        "outputPath": "C:\\Users\\thoma\\dev\\DiscordBotC-\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

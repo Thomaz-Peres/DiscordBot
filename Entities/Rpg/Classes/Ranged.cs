@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstBotDiscord.Entities.Rpg.Class
+namespace FirstBotDiscord.Entities.Rpg.Classes
 {
-    public enum ClassEnum
+    public class Ranged : BaseClasses
     {
-        Warrior,
-        Mage,
-        Healer,
-        Ranged
     }
 }
