@@ -50,75 +50,75 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.1.0, )"
             },
             "DSharpPlus.CommandsNext": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.1.0, )"
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.1.0, )"
             },
             "DSharpPlus.Lavalink": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.1.0, )"
             },
             "DSharpPlus.Rest": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.1.0, )"
             },
             "DSharpPlus.VoiceNext": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.1.0, )"
             },
             "Lavalink4NET": {
               "target": "Package",
-              "version": "[1.6.3, )"
+              "version": "[2.1.0, )"
             },
             "Lavalink4NET.DSharpPlus": {
               "target": "Package",
-              "version": "[1.6.3, )"
+              "version": "[2.0.0-preview.1, )"
             },
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
-              "version": "[6.0.0-preview.6.21355.2, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.0-preview.6.21352.1, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.0-preview.6.21352.1, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.0-preview.6.21352.1, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[6.0.0-preview.6.21352.12, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[6.0.0-preview.6.21352.12, )"
+              "version": "[6.0.0, )"
             },
             "MongoDB.Bson": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.14.0-beta1, )"
             },
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.14.0-beta1, )"
             },
             "MongoDB.Driver.Core": {
               "target": "Package",
-              "version": "[2.13.0, )"
+              "version": "[2.14.0-beta1, )"
             }
           },
           "imports": [
@@ -136,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.5.21302.13\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
