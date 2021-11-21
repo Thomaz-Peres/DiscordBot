@@ -42,7 +42,8 @@ namespace FirstBotDiscord.Services
                 var fightOrNot = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id); 
                 if(fightOrNot.Result.Content.ToLower() == "sim" || fightOrNot.Result.Content.ToLower() == "s")
                 {
-                    await Battle(monster);
+                    await Battle(ctx, monster);
+                    return;
                 }
                 else
                 {
@@ -61,9 +62,18 @@ namespace FirstBotDiscord.Services
             }
         }
 
-        public async Task Battle(BaseMonstersEntity monster)
+        public async Task Battle(CommandContext ctx, BaseMonstersEntity monster)
         {
+            var player = await _dataContext.CollectionPlayers.Find(x => x.PlayerId == ctx.User.Id && x.NamePlayer == ctx.User.Username).FirstOrDefaultAsync();
+            var message = ctx.Message;
+                        
 
+            if (message.Author.Id == player.PlayerId && (message.Content.ToLower() == "sim" || message.Content.ToLower() == "s"))
+            {
+                var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
+
+
+            }
         }
     }
 }
