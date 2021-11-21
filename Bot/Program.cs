@@ -12,6 +12,7 @@ using FirstBotDiscord.Commands;
 using FirstBotDiscord.Configurations;
 using FirstBotDiscord.Database;
 using FirstBotDiscord.Repository;
+using FirstBotDiscord.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace FirstBotDiscord.Bot
         public CharactersRepository CharactersRepository { get; private set; }
         public AtributesRepository AtributesRepository { get; private set; }
         public MonsterRepository MonsterRepository { get; private set; }
+        public BattleService BattleService { get; private set; }
 
         public static void Main(string[] args) =>
             new Program().RodandoBot(args).GetAwaiter().GetResult();
@@ -53,6 +55,7 @@ namespace FirstBotDiscord.Bot
             this.CharactersRepository = new CharactersRepository(this.Database);
             this.AtributesRepository = new AtributesRepository(this.Database);
             this.MonsterRepository = new MonsterRepository(this.Database);
+            this.BattleService = new BattleService(this.Database);
 
 
             var services = new ServiceCollection()
@@ -62,6 +65,7 @@ namespace FirstBotDiscord.Bot
                 .AddSingleton(this.CharactersRepository)
                 .AddSingleton(this.AtributesRepository)
                 .AddSingleton(this.MonsterRepository)
+                .AddSingleton(this.BattleService)
                 .BuildServiceProvider();
 
 
@@ -78,6 +82,7 @@ namespace FirstBotDiscord.Bot
             commands.RegisterCommands<StatusCommands>();
             commands.RegisterCommands<ItemCommands>();
             commands.RegisterCommands<MonsterCommands>();
+            commands.RegisterCommands<BattleCommands>();
             commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<B3Commands>();
 

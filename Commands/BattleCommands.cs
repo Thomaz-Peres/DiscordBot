@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using FirstBotDiscord.Services;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,11 @@ namespace FirstBotDiscord.Commands
         {
             await ctx.TriggerTypingAsync();
 
-            await _battleService.SearchEnemy(monsterLevel);
+            var embed = new DiscordEmbedBuilder();
+            embed.WithDescription("Procurando um monstro");
+            await ctx.RespondAsync(embed.Build());
+
+            await _battleService.SearchEnemy(ctx, monsterLevel);
         }
     }
 }
