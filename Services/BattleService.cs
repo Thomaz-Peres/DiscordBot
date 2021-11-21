@@ -1,6 +1,9 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using FirstBotDiscord.Database;
+using FirstBotDiscord.Entities.Rpg.RpgMonsters;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -31,6 +34,22 @@ namespace FirstBotDiscord.Services
                 embed.AddField("O monstro é um boss? ", boss, true);
 
                 await ctx.RespondAsync(embed.Build());
+
+                embed = new DiscordEmbedBuilder();
+                embed.WithDescription("Você quer lutar com esse mob ? Sim/Não");
+                await ctx.RespondAsync(embed.Build());
+
+                var fightOrNot = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id); 
+                if(fightOrNot.Result.Content.ToLower() == "sim" || fightOrNot.Result.Content.ToLower() == "s")
+                {
+                    await Battle(monster);
+                }
+                else
+                {
+                    embed = new();
+                    embed.WithDescription("^Batalha evitada");
+                    await ctx.RespondAsync(embed.Build());
+                }
                 return;
             }
             else
@@ -40,6 +59,11 @@ namespace FirstBotDiscord.Services
                 await ctx.RespondAsync(embed.Build());
                 return;
             }
+        }
+
+        public async Task Battle(BaseMonstersEntity monster)
+        {
+
         }
     }
 }
