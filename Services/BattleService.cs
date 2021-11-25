@@ -27,11 +27,12 @@ namespace FirstBotDiscord.Services
 
             if (monster != null)
             {
-                embed.WithTitle($"Monstro encontrado: {monster.MonsterName}");
+                embed.WithTitle($"Monstro encontrado 👾");
+                embed.AddField("Nome do monstro: ", monster.MonsterName);
                 embed.AddField("Vida do monstro: ", monster.MonsterLifePoints.CurrentOrMinValuePoints.ToString());
                 embed.AddField("Mana do monstro: ", monster.MonsterManaPoints.CurrentOrMinValuePoints.ToString());
-                var boss = monster.IsBoss ? "sim" : "nao";
-                embed.AddField("O monstro é um boss? ", boss, true);
+                var boss = monster.IsBoss ? "Boss" : "Normal";
+                embed.AddField("Tipo de monstro: ", boss, true);
 
                 await ctx.RespondAsync(embed.Build());
 
@@ -48,7 +49,7 @@ namespace FirstBotDiscord.Services
                 else
                 {
                     embed = new();
-                    embed.WithDescription("^Batalha evitada");
+                    embed.WithDescription("Batalha evitada, seu patinho 🦢🦆");
                     await ctx.RespondAsync(embed.Build());
                 }
                 return;
