@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "98aaiILj5VaLbTCMF20sz9HCXv89kdlEtvhWOCFD1z28EO8vigZ2G2z99HZlQovUJCvOJEW7c7Hec6E/inY82g==",
+  "dgSpecHash": "g0SuuaLwltI/gBAkLmQO3LVubMErZhW62zltb95ehArxZL/DWIBfRx9IkQA2litKsvjXavyoel//SEn5XUfCcA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thoma\\dev\\DiscordBotC-\\FirstBotDiscord.csproj",
+  "projectFilePath": "E:\\thoma\\Dev\\DiscordBot\\FirstBotDiscord.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thoma\\.nuget\\packages\\concurrenthashset\\1.1.0\\concurrenthashset.1.1.0.nupkg.sha512",
     "C:\\Users\\thoma\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
