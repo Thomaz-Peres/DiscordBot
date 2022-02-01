@@ -3,6 +3,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using FirstBotDiscord.Database;
+using FirstBotDiscord.Entities.Rpg.Player;
 using FirstBotDiscord.Entities.Rpg.RpgMonsters;
 using MongoDB.Driver;
 using System;
@@ -24,8 +25,9 @@ namespace FirstBotDiscord.Services
         {
             var embed = new DiscordEmbedBuilder();
             var monster = await _dataContext.CollectionMonsters.Find(x => x.Level == monsterLevel).FirstOrDefaultAsync();
+            var player = await _dataContext.CollectionPlayers.Find(x => x.PlayerId == ctx.User.Id && x.NamePlayer == ctx.User.Username).FirstOrDefaultAsync();
 
-            if (monster != null)
+            if (monster != null && player.MyCharacter.CurrentLocalization == monster.MonsterLocalization)
             {
                 embed.WithTitle($"Monstro encontrado 👾");
                 embed.AddField("Nome do monstro: ", monster.MonsterName);
@@ -43,7 +45,7 @@ namespace FirstBotDiscord.Services
                 var fightOrNot = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id); 
                 if(fightOrNot.Result.Content.ToLower() == "sim" || fightOrNot.Result.Content.ToLower() == "s")
                 {
-                    await Battle(ctx, monster, fightOrNot.Result.Content);
+                    await Battle(ctx, monster, player, fightOrNot.Result.Content);
                     return;
                 }
                 else
@@ -63,9 +65,8 @@ namespace FirstBotDiscord.Services
             }
         }
 
-        public async Task Battle(CommandContext ctx, BaseMonstersEntity monster, string battleMessageAccepted)
+        public async Task Battle(CommandContext ctx, BaseMonstersEntity monster, PlayerEntity player, string battleMessageAccepted)
         {
-            var player = await _dataContext.CollectionPlayers.Find(x => x.PlayerId == ctx.User.Id && x.NamePlayer == ctx.User.Username).FirstOrDefaultAsync();
             string battleAccepted = battleMessageAccepted;
             var embed = new DiscordEmbedBuilder();        
 
@@ -85,8 +86,6 @@ namespace FirstBotDiscord.Services
                                       $"O iniciante será {ganhador}");
                 embed.WithFooter("Se você for quem ira começar, faça seu ataque em ate 1 minuto");
                 await ctx.RespondAsync(embed.Build());
-
-
 
                 var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
 
