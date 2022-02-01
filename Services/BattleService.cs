@@ -43,7 +43,7 @@ namespace FirstBotDiscord.Services
                 var fightOrNot = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id); 
                 if(fightOrNot.Result.Content.ToLower() == "sim" || fightOrNot.Result.Content.ToLower() == "s")
                 {
-                    await Battle(ctx, monster);
+                    await Battle(ctx, monster, fightOrNot.Result.Content);
                     return;
                 }
                 else
@@ -63,14 +63,31 @@ namespace FirstBotDiscord.Services
             }
         }
 
-        public async Task Battle(CommandContext ctx, BaseMonstersEntity monster)
+        public async Task Battle(CommandContext ctx, BaseMonstersEntity monster, string battleMessageAccepted)
         {
             var player = await _dataContext.CollectionPlayers.Find(x => x.PlayerId == ctx.User.Id && x.NamePlayer == ctx.User.Username).FirstOrDefaultAsync();
-            var message = ctx.Message;
-                        
+            string battleAccepted = battleMessageAccepted;
+            var embed = new DiscordEmbedBuilder();        
 
-            if (message.Author.Id == player.PlayerId && (message.Content.ToLower() == "sim" || message.Content.ToLower() == "s"))
+            if (ctx.Message.Author.Id == player.PlayerId && (battleAccepted.ToLower() == "sim" || battleAccepted.ToLower() == "s"))
             {
+                embed.WithDescription($"Batalha iniciada entre {player.NamePlayer} e {monster.MonsterName}\n" +
+                    $"🎲🎲 rolando os dados para ver quer ira começar 🎲🎲");
+                await ctx.RespondAsync(embed.Build());
+
+                int playerDice = new Random().Next(1, 20);
+                int monsterDice = new Random().Next(1, 20);
+                var ganhador = playerDice > monsterDice ? player.NamePlayer : monster.MonsterName;
+
+                embed = new DiscordEmbedBuilder();
+                embed.WithDescription($"{player.NamePlayer} tirou: {playerDice}\n" +
+                                      $"{monster.MonsterName} tirou: {monsterDice}\n" +
+                                      $"O iniciante será {ganhador}");
+                embed.WithFooter("Se você for quem ira começar, faça seu ataque em ate 1 minuto");
+                await ctx.RespondAsync(embed.Build());
+
+
+
                 var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
 
 
