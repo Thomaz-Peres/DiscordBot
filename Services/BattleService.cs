@@ -17,9 +17,13 @@ namespace FirstBotDiscord.Services
     public class BattleService
     {
         private readonly DataContext _dataContext;
+        private readonly MonsterAttacks _monsterAttacks;
 
-        public BattleService(DataContext dataContext) =>
+        public BattleService(DataContext dataContext, MonsterAttacks monsterAttacks)
+        {
             _dataContext = dataContext;
+            _monsterAttacks = monsterAttacks;
+        }
 
         public async Task SearchEnemy(CommandContext ctx, int monsterLevel)
         {
@@ -89,6 +93,13 @@ namespace FirstBotDiscord.Services
 
                 var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
 
+                if (ganhador == monster.MonsterName)
+                    _monsterAttacks.MonsterChooses(ctx, monster, player.MyCharacter);
+                else
+                {
+                    embed = new DiscordEmbedBuilder();
+                    embed.WithDescription("Escolha seus ataques");
+                }
 
             }
         }
