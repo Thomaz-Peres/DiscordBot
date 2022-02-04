@@ -11,7 +11,7 @@ namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
 {
     public class MonsterAttacks
     {
-        public void MonsterChooses(CommandContext ctx, BaseMonstersEntity monster, CharacterEntity character)
+        public void MonsterChoises(CommandContext ctx, BaseMonstersEntity monster, CharacterEntity character)
         {
             var escolha = new Random().Next(1, 3);
 
@@ -39,7 +39,7 @@ namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
             Um personagem com 300 DEF recebe 25 % do dano de um ataque.
             Um personagem com 400 DEF recebe 20 % do dano de um ataque. */
 
-            var armor = new Random().Next((int)character.Armor.CurrentOrMinValuePoints, (int)character.Armor.MaxValuePoints);
+            var armor = new Random().Next(5, 10) + new Random().Next((int)character.Armor.CurrentOrMinValuePoints, (int)character.Armor.MaxValuePoints);
 
             character.LifePoints.CurrentOrMinValuePoints -= baseAtaque / (1 + armor / 100);
 

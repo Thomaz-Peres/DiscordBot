@@ -18,11 +18,13 @@ namespace FirstBotDiscord.Services
     {
         private readonly DataContext _dataContext;
         private readonly MonsterAttacks _monsterAttacks;
+        private readonly PlayerAttacks _playerAttacks;
 
-        public BattleService(DataContext dataContext, MonsterAttacks monsterAttacks)
+        public BattleService(DataContext dataContext, MonsterAttacks monsterAttacks, PlayerAttacks playerAttacks)
         {
             _dataContext = dataContext;
             _monsterAttacks = monsterAttacks;
+            _playerAttacks = playerAttacks;
         }
 
         public async Task SearchEnemy(CommandContext ctx, int monsterLevel)
@@ -72,7 +74,7 @@ namespace FirstBotDiscord.Services
         public async Task Battle(CommandContext ctx, BaseMonstersEntity monster, PlayerEntity player, string battleMessageAccepted)
         {
             string battleAccepted = battleMessageAccepted;
-            var embed = new DiscordEmbedBuilder();        
+            var embed = new DiscordEmbedBuilder();  
 
             if (ctx.Message.Author.Id == player.PlayerId && (battleAccepted.ToLower() == "sim" || battleAccepted.ToLower() == "s"))
             {
@@ -94,11 +96,15 @@ namespace FirstBotDiscord.Services
                 var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
 
                 if (ganhador == monster.MonsterName)
-                    _monsterAttacks.MonsterChooses(ctx, monster, player.MyCharacter);
+                    _monsterAttacks.MonsterChoises(ctx, monster, player.MyCharacter);
                 else
                 {
                     embed = new DiscordEmbedBuilder();
-                    embed.WithDescription("Escolha seus ataques");
+                    embed.WithDescription("Escolha seus ataques: \n" +
+                        "1: ataque básico");
+                    var playerChoise = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
+
+                    _playerAttacks.ChoiseAttack(ctx, player.MyCharacter, monster, int.Parse(playerChoise.Result.Content));
                 }
 
             }
