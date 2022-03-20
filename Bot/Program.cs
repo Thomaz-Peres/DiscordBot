@@ -72,38 +72,38 @@ namespace FirstBotDiscord.Bot
             var commands = discord.UseCommandsNext(new CommandsNextConfiguration
             {
                 Services = services,
-                StringPrefixes = Parameters.Prefix,
-                CaseSensitive = true,
-                EnableDms = false
+                StringPrefixes = Parameters.Prefix
             });
 
+            commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<StartCommands>();
             commands.RegisterCommands<AssignAtributtesCharacter>();
             commands.RegisterCommands<StatusCommands>();
             commands.RegisterCommands<ItemCommands>();
             commands.RegisterCommands<MonsterCommands>();
             commands.RegisterCommands<BattleCommands>();
-            commands.RegisterCommands<LavaLinkCommands>();
             commands.RegisterCommands<B3Commands>();
 
             //B3Api.B3Api.B3(args);
 
-            // var endPoint = new ConnectionEndpoint
-            // {
-            //     Hostname = "127.0.0.1",
-            //     Port = 2333
-            // };
+            var endPoint = new ConnectionEndpoint
+            {
+                Hostname = "127.0.0.1",
+                Port = 2333
+            };
 
-            // var lavaLinkConfig = new LavalinkConfiguration
-            // {
-            //     Password = "youshallnotpass",
-            //     RestEndpoint = endPoint,
-            //     SocketEndpoint = endPoint
-            // };
+            var lavaLinkConfig = new LavalinkConfiguration
+            {
+                Password = "youshallnotpass",
+                RestEndpoint = endPoint,
+                SocketEndpoint = endPoint
+            };
 
-            // var lavalink = discord.UseLavalink();
+            var lavalink = discord.UseLavalink();
             await discord.ConnectAsync();
-            // await lavalink.ConnectAsync(lavaLinkConfig);
+            await lavalink.ConnectAsync(lavaLinkConfig);
+
+            
 
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);

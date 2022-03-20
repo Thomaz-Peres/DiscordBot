@@ -47,75 +47,75 @@
           "dependencies": {
             "DSharpPlus": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.2.0-nightly-01099, )"
             },
             "DSharpPlus.CommandsNext": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.2.0-nightly-01099, )"
             },
             "DSharpPlus.Interactivity": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.2.0-nightly-01099, )"
             },
             "DSharpPlus.Lavalink": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.2.0-nightly-01099, )"
             },
             "DSharpPlus.Rest": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.2.0-nightly-01099, )"
             },
             "DSharpPlus.VoiceNext": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[4.2.0-nightly-01099, )"
             },
             "Lavalink4NET": {
               "target": "Package",
-              "version": "[2.1.0, )"
+              "version": "[2.1.1, )"
             },
             "Lavalink4NET.DSharpPlus": {
               "target": "Package",
-              "version": "[2.0.0-preview.1, )"
+              "version": "[2.1.1, )"
             },
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0-preview.2.22153.2, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0-preview.2.22153.1, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0-preview.2.22153.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0-preview.2.22153.1, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0-preview.2.22152.2, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0-preview.2.22152.2, )"
             },
             "MongoDB.Bson": {
               "target": "Package",
-              "version": "[2.14.0-beta1, )"
+              "version": "[2.15.0, )"
             },
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[2.14.0-beta1, )"
+              "version": "[2.15.0, )"
             },
             "MongoDB.Driver.Core": {
               "target": "Package",
-              "version": "[2.14.0-beta1, )"
+              "version": "[2.15.0, )"
             }
           },
           "imports": [

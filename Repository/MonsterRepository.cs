@@ -65,7 +65,7 @@ namespace FirstBotDiscord.Repository
                     monster.MonsterManaPoints.CurrentOrMinValuePoints = monster.MonsterManaPoints.MaxValuePoints;
 
                     monster.MonsterAtributes.PontosLivres.CurrentValuePoints += 5 * monster.Level;
-                    monster.monsterLocalization = new LocalizationEntity(ctx.Channel.Id, ctx.Channel.Name, ctx.Guild.Id);
+                    monster.MonsterLocalization = new LocalizationEntity(ctx.Channel.Id, ctx.Channel.Name, ctx.Guild.Id);
 
                     embed.WithTitle("Novo monstro:");
                     embed.AddField("Nome:", monster.MonsterName, true);
@@ -74,7 +74,7 @@ namespace FirstBotDiscord.Repository
 
                     embed.AddField("Vida do monstro:", monster.MonsterLifePoints.CurrentOrMinValuePoints.ToString(), true);
                     embed.AddField("Mana do monstro:", monster.MonsterManaPoints.CurrentOrMinValuePoints.ToString(), true);
-                    embed.AddField("Localização do monstro:", monster.monsterLocalization.ChannelName);
+                    embed.AddField("Localização do monstro:", monster.MonsterLocalization.ChannelName);
 
                     //embed.AddField("Tempo de spawn:", monster.Spawn.ToString());
                     embed.WithFooter("Todos os monstros novos começam com status zerados, mas com alguns pontos de atributos de acordo com seu level\nVeja os comando abaixo para adicionar os atributos");

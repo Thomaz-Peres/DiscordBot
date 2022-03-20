@@ -20,6 +20,11 @@ namespace FirstBotDiscord.Services
         private readonly MonsterAttacks _monsterAttacks;
         private readonly PlayerAttacks _playerAttacks;
 
+        public BattleService(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+
         public BattleService(DataContext dataContext, MonsterAttacks monsterAttacks, PlayerAttacks playerAttacks)
         {
             _dataContext = dataContext;
@@ -102,6 +107,7 @@ namespace FirstBotDiscord.Services
                     embed = new DiscordEmbedBuilder();
                     embed.WithDescription("Escolha seus ataques: \n" +
                         "1: ataque básico");
+                    await ctx.RespondAsync(embed.Build());
                     var playerChoise = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
 
                     _playerAttacks.ChoiseAttack(ctx, player.MyCharacter, monster, int.Parse(playerChoise.Result.Content));

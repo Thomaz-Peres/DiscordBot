@@ -13,6 +13,12 @@ namespace FirstBotDiscord.Commands
 {
     public class LavaLinkCommands : BaseCommandModule
     {
+        public static LavalinkNodeConnection LavalinkNode { get; private set; }
+        LavalinkTrack musicaAtual = new();
+        Queue<LavalinkTrack> musicQueue = new();
+
+        bool musicPlaying = false;
+
         //[Command]
         //public async Task Join(CommandContext context, DiscordChannel channel) 
         //{
@@ -64,11 +70,13 @@ namespace FirstBotDiscord.Commands
         }
 
         [Command]
-        public async Task Play(CommandContext context, [RemainingText]string search)
+        public async Task Play(CommandContext context, [RemainingText] string search)
         {
             var lava = context.Client.GetLavalink();
             var node = lava.ConnectedNodes.Values.First();
-            var conn = node.GetGuildConnection(context.Member.Guild);
+            var conn = node.GetGuildConnection(await lava.Client.GetGuildAsync(context.Member.Guild.Id).ConfigureAwait(false));
+
+            //var musicaAtual; 
 
             if (context.Member.VoiceState.Channel != null)
             {
@@ -85,34 +93,40 @@ namespace FirstBotDiscord.Commands
                 await context.RespondAsync("LavaLink não esta conectado");
                 return;
             }
-            
 
             var loadResult = await node.Rest.GetTracksAsync(search);
 
-            if(loadResult.LoadResultType == LavalinkLoadResultType.LoadFailed || loadResult.LoadResultType == LavalinkLoadResultType.NoMatches)
+            if (loadResult.LoadResultType == LavalinkLoadResultType.LoadFailed || loadResult.LoadResultType == LavalinkLoadResultType.NoMatches)
             {
                 await context.RespondAsync($"Falha ao localizar a musica do link {search}");
                 return;
             }
 
             LavalinkTrack track = loadResult.Tracks.First();
-            List<LavalinkTrack> trackList = new List<LavalinkTrack>();
-            
-            if (loadResult.Tracks.ToList().Count != 0)
+
+            if(musicQueue.Count == 0 && musicPlaying != true)
             {
-                trackList = loadResult.Tracks.ToList();
-                trackList.Add(track);
-            }
-            
-            track = trackList.AsQueryable().FirstOrDefault();
-
-            await conn.PlayAsync(track);
-
-            if(!conn.IsConnected)
-                await context.RespondAsync($":thumbsup: Conectado no canal {context.Member.VoiceState.Channel.Name}\n Música tocando: {track.Title} :headphones:");
+                await conn.PlayAsync(track);
+                await context.RespondAsync($"Música tocando: {track.Title} :headphones:").ConfigureAwait(false);
+                musicPlaying = true;
+                musicaAtual = track;
+            } 
             else
-                await context.RespondAsync($"Música tocando: {track.Title} :headphones:");
+            {
+                musicQueue.Enqueue(track);
+                await context.RespondAsync($"A música: {track.Title} foi adicionada à playlist de músicas para tocar!\n " +
+                                           $"Lugar na fila {musicQueue.Count}").ConfigureAwait(false);
+            }
+
+            conn.PlaybackFinished += Conn_PlaybackFinished;
         }
+
+        private async Task Conn_PlaybackFinished(LavalinkGuildConnection sender, DSharpPlus.Lavalink.EventArgs.TrackFinishEventArgs e)
+        {
+            musicaAtual = musicQueue.Dequeue();
+            await sender.PlayAsync(musicaAtual);
+        }
+
         [Command]
         public async Task Pause(CommandContext context)
         {
@@ -126,13 +140,13 @@ namespace FirstBotDiscord.Commands
                 return;
             }
 
-            if(conn == null)
+            if (conn == null)
             {
                 await context.RespondAsync("LavaLink não esta conectado");
                 return;
             }
 
-            if(conn.CurrentState.CurrentTrack == null)
+            if (conn.CurrentState.CurrentTrack == null)
             {
                 await context.RespondAsync("Não tem nenhuma musica tocando");
                 return;
@@ -154,13 +168,13 @@ namespace FirstBotDiscord.Commands
                 return;
             }
 
-            if(conn == null)
+            if (conn == null)
             {
                 await context.RespondAsync("LavaLink não esta conectado");
                 return;
             }
 
-            if(conn.CurrentState.CurrentTrack == null)
+            if (conn.CurrentState.CurrentTrack == null)
             {
                 await context.RespondAsync("Não tem nenhuma musica na fila");
                 return;
@@ -182,12 +196,43 @@ namespace FirstBotDiscord.Commands
                 return;
             }
 
-            if(conn == null)
+            if (conn == null)
             {
                 await context.RespondAsync("LavaLink não esta conectado");
             }
 
             await conn.StopAsync();
+        }
+
+        [Command]
+        public async Task Skipas(CommandContext context)
+        {
+            var lava = context.Client.GetLavalink();
+            var node = lava.ConnectedNodes.Values.First();
+            var conn = node.GetGuildConnection(context.Member.VoiceState.Guild);
+
+            if (context.Member.VoiceState == null || context.Member.VoiceState.Channel == null)
+            {
+                await context.RespondAsync("Você nao esta conectado a um canal de voz");
+                return;
+            }
+
+            if (conn == null)
+            {
+                await context.RespondAsync("LavaLink não esta conectado");
+            }
+
+            if(musicQueue.Count != 0 || musicPlaying == false)
+            {
+                musicaAtual = musicQueue.Dequeue();
+                await context.RespondAsync($"Musica skipada com sucesso, música a seguir {musicaAtual.Title}");
+                await conn.PlayAsync(musicaAtual);
+            }
+            else
+            {
+                await conn.StopAsync();
+                await context.RespondAsync("Como a fila está vazia, a música foi parada");
+            }
         }
     }
 }
