@@ -4,6 +4,7 @@ using System;
 
 namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
 {
+    [MongoDB.Bson.Serialization.Attributes.BsonIgnoreExtraElements]
     public class BaseMonstersEntity
     {
         [BsonId]
@@ -14,7 +15,7 @@ namespace FirstBotDiscord.Entities.Rpg.RpgMonsters
         public bool IsBoss { get; set; }
 
         public LocalizationEntity MonsterLocalization { get; set; } = new LocalizationEntity();
-
+        
         public AtributesEntity MonsterAtributes { get; set; } = new AtributesEntity();
 
         public StatusOfPointsEntity MonsterLifePoints { get; set; } = new StatusOfPointsEntity(30, 30);

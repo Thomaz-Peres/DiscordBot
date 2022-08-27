@@ -125,10 +125,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
                                 
                                 embed.WithDescription("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -160,10 +157,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
 
                                 embed.WithFooter("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -195,10 +189,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
 
                                 embed.WithFooter("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -229,10 +220,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
 
                                 embed.WithFooter("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -265,10 +253,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
 
                                 embed.WithFooter("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -300,10 +285,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
 
                                 embed.WithFooter("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -336,10 +318,7 @@ namespace FirstBotDiscord.Repository
 
                                 embed = new DiscordEmbedBuilder();
                                 embed.WithTitle("Seus atributos agora");
-                                embed.WithDescription($"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
-                                $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
-                                $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
-                                $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}");
+                                embed.WithDescription(StatusAfterUp(monster));
 
                                 embed.WithFooter("Deseja continuar adicionando os atributos do monstro ? Responda sim ou não");
                                 ctx.RespondAsync(embed.Build());
@@ -401,6 +380,14 @@ namespace FirstBotDiscord.Repository
                     return;
                 }
             });
+        }
+
+        private string StatusAfterUp(BaseMonstersEntity monster)
+        {
+            return  $"Vitalidade = {monster.MonsterAtributes.Vitalidade.CurrentValuePoints} -- Sorte = {monster.MonsterAtributes.Sorte.CurrentValuePoints}\n" +
+                    $"Agilidade = {monster.MonsterAtributes.Agilidade.CurrentValuePoints} -- Carisma = {monster.MonsterAtributes.Carisma.CurrentValuePoints}\n" +
+                    $"Força = {monster.MonsterAtributes.Forca.CurrentValuePoints} -- Inteligencia = {monster.MonsterAtributes.Inteligencia.CurrentValuePoints}\n" +
+                    $"Sabedoria = {monster.MonsterAtributes.Sabedoria.CurrentValuePoints}";
         }
     }
 }

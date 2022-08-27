@@ -23,6 +23,7 @@ lavalink:
     youtubeSearchEnabled: true
     soundcloudSearchEnabled: true
     spotifySearchEnabled: true
+    spotifyPlaylistLoad: true
     gc-warnings: true
 
 metrics:

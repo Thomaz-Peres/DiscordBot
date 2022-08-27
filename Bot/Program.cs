@@ -99,11 +99,9 @@ namespace FirstBotDiscord.Bot
                 SocketEndpoint = endPoint
             };
 
-            var lavalink = discord.UseLavalink();
+            //var lavalink = discord.UseLavalink();
             await discord.ConnectAsync();
-            await lavalink.ConnectAsync(lavaLinkConfig);
-
-            
+            //await lavalink.ConnectAsync(lavaLinkConfig);
 
             //espera infinita, para o bot ficar online continuamente.
             await Task.Delay(-1);

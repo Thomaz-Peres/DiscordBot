@@ -5,7 +5,7 @@ namespace FirstBotDiscord.Entities.Rpg.Player
     public class LevelEntity
     {
         public int Level { get; set; } = 1;
-        public double CurrentExperience { get; set; }
+        public double CurrentExperience { get; set; } = 0;
         public double ExperienceForNextLevel { get; set; } = 50;
 
         public void AddExperience(double xp)

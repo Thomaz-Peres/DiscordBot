@@ -74,7 +74,7 @@ namespace FirstBotDiscord.Commands
         {
             var lava = context.Client.GetLavalink();
             var node = lava.ConnectedNodes.Values.First();
-            var conn = node.GetGuildConnection(await lava.Client.GetGuildAsync(context.Member.Guild.Id).ConfigureAwait(false));
+            var conn = node.GetGuildConnection(context.Member.Guild);
 
             //var musicaAtual; 
 
@@ -123,8 +123,14 @@ namespace FirstBotDiscord.Commands
 
         private async Task Conn_PlaybackFinished(LavalinkGuildConnection sender, DSharpPlus.Lavalink.EventArgs.TrackFinishEventArgs e)
         {
-            musicaAtual = musicQueue.Dequeue();
-            await sender.PlayAsync(musicaAtual);
+            musicPlaying = false;
+            if (musicQueue.Count != 0)
+            {
+                musicaAtual = musicQueue.Dequeue();
+                musicPlaying = true;
+                await e.Player.PlayAsync(musicaAtual);
+            }
+            return;
         }
 
         [Command]

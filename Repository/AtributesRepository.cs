@@ -31,7 +31,7 @@ namespace FirstBotDiscord.Repository
 
                 embed.AddField("HP", $"{character.MyCharacter.LifePoints.CurrentOrMinValuePoints} / {character.MyCharacter.LifePoints.MaxValuePoints}", true);
                 embed.AddField("MP", $"{character.MyCharacter.ManaPoints.CurrentOrMinValuePoints} / {character.MyCharacter.ManaPoints.MaxValuePoints}", true);
-                embed.AddField("Karma", character.MyCharacter.KarmaPoints.CurrentOrMinValuePoints.ToString(), true);
+                embed.AddField("Karma", $"{character.MyCharacter.KarmaPoints.CurrentOrMinValuePoints}", true);
 
                 //embed.AddField("Sua raça:", character.MyCharacter.Race);
                 //embed.AddField("Sua classe atual:", character.MyCharacter.Class);
@@ -61,32 +61,35 @@ namespace FirstBotDiscord.Repository
                 var embed = new DiscordEmbedBuilder();
             
                 embed.WithTitle($"Status e atributos {status.NamePlayer}");
-            
-                var atb = status.MyCharacter.AtributesCharacter;
 
-                embed.WithDescription($@"{new StringBuilder().AppendLine("STATUS       MIN/MAX")}" +
-                                      $"Ataque fisico: {status.MyCharacter.PhysicalAttack.CurrentOrMinValuePoints} / {status.MyCharacter.PhysicalAttack.MaxValuePoints} \n" +
-                                      $"Ataque magico: {status.MyCharacter.MagicAttack.CurrentOrMinValuePoints} / {status.MyCharacter.MagicAttack.MaxValuePoints} \n" +
-                                      $"Armadura: {status.MyCharacter.Armor.CurrentOrMinValuePoints} / {status.MyCharacter.Armor.MaxValuePoints} \n" +
-                                      $"Resistencia magica: {status.MyCharacter.MagicResistence.CurrentOrMinValuePoints} / {status.MyCharacter.MagicResistence.MaxValuePoints} \n" +
-                                      $"Persuassão: {status.MyCharacter.Persuation.CurrentOrMinValuePoints} / {status.MyCharacter.MagicResistence.MaxValuePoints} \n" +
-                                      $"Sorte: {status.MyCharacter.Luck.CurrentOrMinValuePoints} / {status.MyCharacter.Luck.MaxValuePoints} \n" +
-                                      $"Evasão: {status.MyCharacter.Evasion.CurrentOrMinValuePoints} / {status.MyCharacter.Evasion.MaxValuePoints} \n\n" +
-
-                                      $"{new StringBuilder().AppendLine("ATRIBUTOS")}" +
-                                      $"Força: {atb.Forca.CurrentValuePoints} | " +
-                                      $"Inteligencia: {atb.Inteligencia.CurrentValuePoints}\n" +
-                                      $"Vitalidade: {atb.Vitalidade.CurrentValuePoints} | " +
-                                      $"Agilidade: {atb.Agilidade.CurrentValuePoints}\n" +
-                                      $"Carisma: {atb.Carisma.CurrentValuePoints} | " +
-                                      $"Sabedoria: {atb.Sabedoria.CurrentValuePoints}\n" +
-                                      $"Sorte: {atb.Sorte.CurrentValuePoints} | " +
-                                      $"Pontos Livres: {atb.PontosLivres.CurrentValuePoints}");
+                embed.WithDescription($@"{new StringBuilder().AppendLine("STATUS       MIN/MAX")}" + GetPlayerStatus(status));
 
                 embed.WithFooter("Se possui atributos livres, use o comando 'ap' para utiliza-los");
 
                 await ctx.RespondAsync(embed.Build());
             }
+        }
+
+        private string GetPlayerStatus(Entities.Rpg.Player.PlayerEntity Status)
+        {
+            var atb = Status.MyCharacter.AtributesCharacter;
+            return $"Ataque fisico: {Status.MyCharacter.PhysicalAttack.CurrentOrMinValuePoints} / {Status.MyCharacter.PhysicalAttack.MaxValuePoints} \n" +
+                $"Ataque magico: {Status.MyCharacter.MagicAttack.CurrentOrMinValuePoints} / {Status.MyCharacter.MagicAttack.MaxValuePoints} \n" +
+                $"Armadura: {Status.MyCharacter.Armor.CurrentOrMinValuePoints} / {Status.MyCharacter.Armor.MaxValuePoints} \n" +
+                $"Resistencia magica: {Status.MyCharacter.MagicResistence.CurrentOrMinValuePoints} / {Status.MyCharacter.MagicResistence.MaxValuePoints} \n" +
+                $"Persuassão: {Status.MyCharacter.Persuation.CurrentOrMinValuePoints} / {Status.MyCharacter.MagicResistence.MaxValuePoints} \n" +
+                $"Sorte: {Status.MyCharacter.Luck.CurrentOrMinValuePoints} / {Status.MyCharacter.Luck.MaxValuePoints} \n" +
+                $"Evasão: {Status.MyCharacter.Evasion.CurrentOrMinValuePoints} / {Status.MyCharacter.Evasion.MaxValuePoints} \n\n" +
+
+                $"{new StringBuilder().AppendLine("ATRIBUTOS")}" +
+                $"Força: {atb.Forca.CurrentValuePoints} | " +
+                $"Inteligencia: {atb.Inteligencia.CurrentValuePoints}\n" +
+                $"Vitalidade: {atb.Vitalidade.CurrentValuePoints} | " +
+                $"Agilidade: {atb.Agilidade.CurrentValuePoints}\n" +
+                $"Carisma: {atb.Carisma.CurrentValuePoints} | " +
+                $"Sabedoria: {atb.Sabedoria.CurrentValuePoints}\n" +
+                $"Sorte: {atb.Sorte.CurrentValuePoints} | " +
+                $"Pontos Livres: {atb.PontosLivres.CurrentValuePoints}";
         }
     }
 }
