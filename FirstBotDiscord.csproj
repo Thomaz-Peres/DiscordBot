@@ -33,7 +33,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0-preview.2.22152.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.2.22152.2" />
     <PackageReference Include="MongoDB.Bson" Version="2.15.0" />
-    <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.15.0" />
   </ItemGroup>
 
