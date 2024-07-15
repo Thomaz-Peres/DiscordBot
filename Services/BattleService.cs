@@ -38,7 +38,7 @@ namespace FirstBotDiscord.Services
             var monster = await _dataContext.CollectionMonsters.Find(x => x.Level == monsterLevel).FirstOrDefaultAsync();
             var player = await _dataContext.CollectionPlayers.Find(x => x.PlayerId == ctx.User.Id && x.NamePlayer == ctx.User.Username).FirstOrDefaultAsync();
 
-            if (monster != null && player.MyCharacter.CurrentLocalization == monster.MonsterLocalization)
+            if (monster != null && player.MyCharacter.CurrentLocalization.GuildID == monster.MonsterLocalization.GuildID)
             {
                 embed.WithTitle($"Monstro encontrado 👾");
                 embed.AddField("Nome do monstro: ", monster.MonsterName);
@@ -98,19 +98,20 @@ namespace FirstBotDiscord.Services
                 embed.WithFooter("Se você for quem ira começar, faça seu ataque em ate 1 minuto");
                 await ctx.RespondAsync(embed.Build());
 
-                var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
+                //var battleInteractivity = ctx.Client.UseInteractivity().WaitForMessageAsync(x => x.Author.Id == player.PlayerId && x.ChannelId == ctx.Channel.Id);
 
                 if (ganhador == monster.MonsterName)
-                    _monsterAttacks.MonsterChoises(ctx, monster, player.MyCharacter);
+                    _monsterAttacks.MonsterChoises(ctx, monster, player?.MyCharacter);
                 else
                 {
                     embed = new DiscordEmbedBuilder();
                     embed.WithDescription("Escolha seus ataques: \n" +
                         "1: ataque básico");
                     await ctx.RespondAsync(embed.Build());
+
                     var playerChoise = await ctx.Client.GetInteractivity().WaitForMessageAsync(x => x.Author.Id == ctx.User.Id && x.ChannelId == ctx.Channel.Id);
 
-                    _playerAttacks.ChoiseAttack(ctx, player.MyCharacter, monster, int.Parse(playerChoise.Result.Content));
+                    _playerAttacks.ChoiseAttack(ctx, player?.MyCharacter, monster, playerChoise.Result?.Content);
                 }
 
             }

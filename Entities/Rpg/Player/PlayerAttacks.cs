@@ -10,9 +10,10 @@ namespace FirstBotDiscord.Entities.Rpg.Player
 {
     public class PlayerAttacks
     {
-        public void ChoiseAttack(CommandContext ctx, CharacterEntity character, BaseMonstersEntity monster, int choise)
+        public void ChoiseAttack(CommandContext ctx, CharacterEntity character, BaseMonstersEntity monster, string choise)
         {
-            switch(choise)
+            var choiseNumber = Convert.ToInt64(choise);
+            switch(choiseNumber)
             {
                 case 1:
                     BasicAttack(ctx, character, monster);
